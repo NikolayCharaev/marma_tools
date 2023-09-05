@@ -8,7 +8,7 @@ import consumablesBg from '@/public/consumables-bg.jpeg';
 import leftoverssBg from '@/public/leftovers-bg.jpeg';
 import Card from './components/Card';
 
-export const navData = [
+const navData = [
   {
     path: './pages/consumables',
     imageUrl: consumablesBg,
@@ -36,7 +36,6 @@ export default function Home() {
       <div className="flex items-center flex-wrap justify-center gap-10 mb-10">
         {navData.map((elem: NavDataProps, index: number) => {
           return <Card elem={elem} key={index} />;
-          
         })}
       </div>
     </div>

@@ -5,7 +5,6 @@ import CustomButton from './CustomButton';
 
 import { NavDataProps } from '@/types/tools';
 
-
 type CardProps = {
   elem: NavDataProps;
 };
