@@ -36,6 +36,7 @@ export default function Home() {
       <div className="flex items-center flex-wrap justify-center gap-10 mb-10">
         {navData.map((elem: NavDataProps, index: number) => {
           return <Card elem={elem} key={index} />;
+          
         })}
       </div>
     </div>
