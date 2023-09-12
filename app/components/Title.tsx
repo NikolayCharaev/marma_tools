@@ -2,9 +2,10 @@ import React, { FC } from 'react';
 
 type TitleProps = {
   children: React.ReactNode;
+  style?: string;
 };
-const Title: FC<TitleProps> = ({ children }) => {
-  return <h1 className="text-left text-2xl mb-10 ">{children}</h1>;
+const Title: FC<TitleProps> = ({ children, style }) => {
+  return <h1 className={`text-left text-2xl  ${style}`}>{children}</h1>;
 };
 
 export default Title;

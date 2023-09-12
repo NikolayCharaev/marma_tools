@@ -18,7 +18,7 @@ export const navData = [
     {
       path: './pages/applications',
       imageUrl: applicationBg,
-      title: 'Заявки на покупку инструментов',
-      description: 'Просмотр и управление заявками на покупку инструментов',
+      title: 'Оставить заявку на покупку инструментов',
+      description: 'Управление заявками на покупку инструментов',
     },
   ];

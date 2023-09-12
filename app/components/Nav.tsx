@@ -17,7 +17,7 @@ const Nav = () => {
           height={72}
         />
       </Link>
-      <Link href="./pages/admin-dashboard">
+      <Link href="../pages/admin-dashboard">
         <CustomButton>панель администрации</CustomButton>
       </Link>
     </nav>

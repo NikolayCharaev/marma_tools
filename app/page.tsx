@@ -6,7 +6,7 @@ import { navData } from '@/data/navData';
 export default function Home() {
   return (
     <div className="">
-      <Title>Выберите категорию</Title>
+      <Title style='mb-10 '>Выберите категорию</Title>
       <div className="flex items-center flex-wrap justify-center gap-10 mb-10">
         {navData.map((elem: NavDataProps, index: number) => {
           const { path, imageUrl, title, description } = elem;
