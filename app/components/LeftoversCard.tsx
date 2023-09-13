@@ -6,6 +6,7 @@ import Image from 'next/image';
 
 import StoneCard from './StoneCard';
 import Title from './Title';
+import CustomButton from './CustomButton';
 function LeftoversCard({ card, imageBg, index }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
@@ -19,9 +20,11 @@ function LeftoversCard({ card, imageBg, index }) {
         onClick={handleOpen}>
         <Image alt="nature" className="w-full h-full object-cover" src={imageBg} />
 
-          <Typography className='absolute top-[20px] left-[20px] p-2 bg-white rounded-xl'  variant="h1">
-            Ряд {index}
-          </Typography>
+        <Typography
+          className="absolute top-[20px] left-[20px] p-2 bg-white rounded-xl"
+          variant="h1">
+          Ряд {index}
+        </Typography>
       </Card>
       <Dialog
         size="xl"
@@ -32,7 +35,11 @@ function LeftoversCard({ card, imageBg, index }) {
           <div className="flex justify-between">
             {card.left && (
               <div className="">
-                <Title style="text-left">левая сторона</Title>
+                <div className="flex justify-between mb-3">
+                  <Title style="text-left">левая сторона</Title>
+                  <CustomButton>Добавить</CustomButton>
+                </div>
+
                 {left?.map((stone) => {
                   return (
                     <>
@@ -44,7 +51,10 @@ function LeftoversCard({ card, imageBg, index }) {
             )}
             {card.right && (
               <div className="">
-                <Title style="text-right">правая сторона</Title>
+                <div className="flex justify-between mb-3">
+                  <Title style="text-left">правая сторона</Title>
+                  <CustomButton>Добавить</CustomButton>
+                </div>
                 {right?.map((stone) => {
                   return (
                     <>
