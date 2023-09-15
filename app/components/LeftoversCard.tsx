@@ -1,24 +1,48 @@
 'use client';
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { Dialog, DialogBody, Card, Typography } from '@material-tailwind/react';
-
 import Image from 'next/image';
-
 import StoneCard from './StoneCard';
 import Title from './Title';
 import CustomButton from './CustomButton';
-function LeftoversCard({ card, imageBg, index }) {
-  const [open, setOpen] = React.useState(false);
+import StoneForm from './StoneForm';
+
+function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
+  const [updateList, setUpdateList] = useState(false);
   const { left, right } = card;
-  console.log('ELEM', card);
-  const adjustedIndex = card + 1;
+
+  const [selectedSide, setSelectedSide] = useState<string>('');
+  const [selectedRow, setSelectedRow] = useState<string>('');
+  const [formModal, setFormModal] = useState<boolean>(false);
+
   return (
     <>
       <Card
         className=" cursor-pointer overflow-hidden transition-opacity hover:opacity-90 w-72 h-[70vh] relative"
-        onClick={handleOpen}>
-        <Image alt="nature" className="w-full h-full object-cover" src={imageBg} />
+        onClick={() => {
+          handleOpen();
+
+          switch (index) {
+            case 1:
+              setSelectedRow('rowOne');
+              break;
+            case 2:
+              setSelectedRow('rowTwo');
+              break;
+            case 3:
+              setSelectedRow('rowThree');
+              break;
+            case 4:
+              setSelectedRow('rowFour');
+              break;
+            case 5:
+              setSelectedRow('rowFive');
+              break;
+          }
+        }}>
+        <Image alt="image" className="w-full h-full object-cover" src={imageBg} />
 
         <Typography
           className="absolute top-[20px] left-[20px] p-2 bg-white rounded-xl"
@@ -32,39 +56,68 @@ function LeftoversCard({ card, imageBg, index }) {
         handler={handleOpen}
         className="w-[80vw] h-[80vh] overflow-scroll mx-auto mt-[20px] p-5">
         <DialogBody divider={true} className="p-0 ">
-          <div className="flex justify-between">
-            {card.left && (
-              <div className="">
-                <div className="flex justify-between mb-3">
-                  <Title style="text-left">левая сторона</Title>
-                  <CustomButton>Добавить</CustomButton>
-                </div>
+          {formModal ? (
+            <>
+              <StoneForm
+                setFormModal={setFormModal}
+                formModal={formModal}
+                selectedRow={selectedRow}
+                selectedSide={selectedSide}
+                updateList={updateList}
+                setUpdateList={setUpdateList}
+                handlePostsUpdate={handlePostsUpdate}
+              />
+            </>
+          ) : (
+            <div className="flex justify-between">
+              {card.left && (
+                <div className="">
+                  <div className="flex justify-between mb-3">
+                    <Title style="text-left">левая сторона</Title>
+                    <CustomButton
+                      onClick={() => {
+                        setSelectedSide('left');
+                        setFormModal(true);
+                        handlePostsUpdate(false);
+                      }}>
+                      Добавить
+                    </CustomButton>
+                  </div>
 
-                {left?.map((stone) => {
-                  return (
-                    <>
-                      <StoneCard stone={stone} />
-                    </>
-                  );
-                })}
-              </div>
-            )}
-            {card.right && (
-              <div className="">
-                <div className="flex justify-between mb-3">
-                  <Title style="text-left">правая сторона</Title>
-                  <CustomButton>Добавить</CustomButton>
+                  {left?.map((stone) => {
+                    return (
+                      <div key={stone._id}>
+                        <StoneCard stone={stone} />
+                      </div>
+                    );
+                  })}
                 </div>
-                {right?.map((stone) => {
-                  return (
-                    <>
-                      <StoneCard stone={stone} />
-                    </>
-                  );
-                })}
-              </div>
-            )}
-          </div>
+              )}
+              <p>Ряд {index}</p>
+              {card.right && (
+                <div className="">
+                  <div className="flex justify-between mb-3">
+                    <Title style="text-left">правая сторона</Title>
+                    <CustomButton
+                      onClick={() => {
+                        setSelectedSide('right');
+                        setFormModal(true);
+                        handlePostsUpdate(false);
+                      }}>
+                      Добавить
+                    </CustomButton>
+                  </div>
+                  {right?.map((stone) => {
+                    return (
+                      <div key={stone._id}>
+                        <StoneCard stone={stone} />
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
         </DialogBody>
       </Dialog>
     </>

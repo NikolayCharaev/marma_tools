@@ -25,7 +25,6 @@ const CardMini = ({ title, imageUrl }) => {
           className="border border-white p-2 rounded-xl active:bg-green-500 px-4"
           onClick={() => {
             setCount(count + 1);
-            console.log('Hola');
           }}>
           +
         </button>

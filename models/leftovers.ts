@@ -19,6 +19,10 @@ const stoneSchema = new Schema({
   imageUrl: {
     type: String,
   },
+
+  thickness : {   // толщина камня
+    type : String
+  }
 });
 
 const pyramidSchema = new Schema({

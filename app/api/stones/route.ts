@@ -1,17 +1,16 @@
 import { connectDB } from '@/utils/database';
 import Pyramid from '@/models/leftovers';
 
-export const POST = async (req, res) => {
-  const { stoneType, width, height, selectedRow, selectedSide, imageUrl } = await req.json();
+export const POST = async (req) => {
+  const { stoneType, width, height, selectedRow, selectedSide, imageUrl,thickness } = await req.json();
 
+
+
+  console.log('IMAGEURL', imageUrl)
   try {
     await connectDB();
-
-    // Проверяем, существует ли объект Pyramid в базе данных
     let existingPyramid = await Pyramid.findOne();
-
     if (!existingPyramid) {
-      // Если объект Pyramid не существует, создаем новый объект с пустыми массивами
       existingPyramid = new Pyramid({
         rowOne: { right: [] },
         rowTwo: { left: [], right: [] },
@@ -27,6 +26,7 @@ export const POST = async (req, res) => {
       width: width,
       height: height,
       imageUrl: imageUrl,
+      thickness  : thickness
     });
 
     // Сохраняем обновленный объект Pyramid в базе данных
@@ -49,14 +49,3 @@ export const GET = async (req) => {
     return new Response('Произошла ошибка при получении остатков камней', { status: 500 });
   }
 };
-
-// export const GET = async (req) => {
-//   try {
-//     await connectDB();
-//     const allStones = await Pyramid.find({}).lean(); // Добавляем метод lean() для конвертации в обычные JavaScript-объекты
-//     return new Response(allStones, { status: 200 });
-//   } catch (err) {
-//     console.log(err);
-//     return new Response('Произошла ошибка при получении остатков камней', { status: 500 });
-//   }
-// };
