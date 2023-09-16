@@ -16,6 +16,8 @@ const Leftovers = () => {
   const [selectedSide, setSelectedSide] = useState('');
   const [updatePosts, setUpdatePosts] = useState<boolean>(false);
 
+  const [allStones, setAllStones] = useState([]);
+
   const handlePostsUpdate = (prop: boolean) => {
     setUpdatePosts(prop);
   };
@@ -42,12 +44,13 @@ const Leftovers = () => {
     const stones = await response.json();
     setAllStones(Object.values(stones[0]));
   };
-  const [allStones, setAllStones] = useState([]);
 
   useEffect(() => {
     // fetchNewStone();
     fetchAllStones();
   }, [updatePosts]);
+
+  console.log(allStones)
   return (
     <>
       <Title style="mb-10">Остатки камня</Title>

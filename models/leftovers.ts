@@ -2,27 +2,23 @@ import { Schema, models, model } from 'mongoose';
 
 const stoneSchema = new Schema({
   stoneType: {
-    // тип камня
     type: String,
     required: true,
   },
   width: {
-    // длинна камня
     type: Number,
     required: true,
   },
   height: {
-    // высота камня
     type: Number,
     required: true,
   },
   imageUrl: {
     type: String,
   },
-
-  thickness : {   // толщина камня
-    type : String
-  }
+  thickness: {
+    type: String,
+  },
 });
 
 const pyramidSchema = new Schema({
@@ -46,7 +42,6 @@ const pyramidSchema = new Schema({
   },
 });
 
-// Проверяем существование модели перед компиляцией
 const Pyramid = models.Pyramid || model('Pyramid', pyramidSchema);
 
 export default Pyramid;

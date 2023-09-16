@@ -26,8 +26,6 @@ type IStoneProps = {
 function StoneCard({ stone }: IStoneProps) {
   const { imageUrl, width, height, stoneType, thickness } = stone;
 
-  console.log('IMAGEURL', imageUrl);
-
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
 
@@ -57,7 +55,7 @@ function StoneCard({ stone }: IStoneProps) {
           </Typography>
         </CardBody>
         <CardFooter className="pt-0 flex items-center mt-4">
-          <CustomButton>Удалить</CustomButton>
+          <CustomButton onClick={}>Удалить</CustomButton>
           <CustomButton>Редактировать</CustomButton>
         </CardFooter>
       </Card>

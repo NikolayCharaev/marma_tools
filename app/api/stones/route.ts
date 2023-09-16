@@ -38,14 +38,25 @@ export const POST = async (req) => {
     return new Response('Ошибка сервера', { status: 500 });
   }
 };
-export const GET = async (req) => {
+export const GET = async () => {
+  await connectDB();
   try {
-    await connectDB();
-    const allStones = await Pyramid.find({});
-    const result = JSON.stringify(allStones);
-    return new Response(result, { status: 200 });
+    const exists = await Pyramid.exists();
+    if (!exists) {
+      const newPyramid = new Pyramid({
+        rowOne: { right: [] },
+        rowTwo: { left: [], right: [] },
+        rowThree: { left: [], right: [] },
+        rowFour: { left: [], right: [] },
+        rowFive: { left: [] },
+      });
+      await newPyramid.save();
+    }
+
+    const allPost = await Pyramid.find();
+    return new Response(JSON.stringify(allPost), { status: 200 });
   } catch (err) {
     console.log(err);
-    return new Response('Произошла ошибка при получении остатков камней', { status: 500 });
+    return new Response('Произошла ошибка', { status: 500 });
   }
 };

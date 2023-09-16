@@ -72,7 +72,7 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
             <div className="flex justify-between">
               {card.left && (
                 <div className="">
-                  <div className="flex justify-between mb-3">
+                  <div className="flex justify-between mb-3 gap-5">
                     <Title style="text-left">левая сторона</Title>
                     <CustomButton
                       onClick={() => {
@@ -96,7 +96,7 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
               <p>Ряд {index}</p>
               {card.right && (
                 <div className="">
-                  <div className="flex justify-between mb-3">
+                  <div className="flex justify-between mb-3 gap-5">
                     <Title style="text-left">правая сторона</Title>
                     <CustomButton
                       onClick={() => {
