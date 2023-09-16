@@ -55,7 +55,7 @@ function StoneCard({ stone }: IStoneProps) {
           </Typography>
         </CardBody>
         <CardFooter className="pt-0 flex items-center mt-4">
-          <CustomButton onClick={}>Удалить</CustomButton>
+          <CustomButton onClick={() => {}}>Удалить</CustomButton>
           <CustomButton>Редактировать</CustomButton>
         </CardFooter>
       </Card>
