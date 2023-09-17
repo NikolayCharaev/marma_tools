@@ -2,11 +2,8 @@ import { connectDB } from '@/utils/database';
 import Pyramid from '@/models/leftovers';
 
 export const POST = async (req) => {
-  const { stoneType, width, height, selectedRow, selectedSide, imageUrl,thickness } = await req.json();
-
-
-
-  console.log('IMAGEURL', imageUrl)
+  const { stoneType, width, height, selectedRow, selectedSide, imageUrl, thickness } =
+    await req.json();
   try {
     await connectDB();
     let existingPyramid = await Pyramid.findOne();
@@ -26,7 +23,7 @@ export const POST = async (req) => {
       width: width,
       height: height,
       imageUrl: imageUrl,
-      thickness  : thickness
+      thickness: thickness,
     });
 
     // Сохраняем обновленный объект Pyramid в базе данных

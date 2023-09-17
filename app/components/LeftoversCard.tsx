@@ -17,6 +17,8 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
   const [selectedRow, setSelectedRow] = useState<string>('');
   const [formModal, setFormModal] = useState<boolean>(false);
 
+  console.log(selectedSide);
+
   return (
     <>
       <Card
@@ -84,10 +86,17 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
                     </CustomButton>
                   </div>
 
-                  {left?.map((stone) => {
+                  {left?.map((stone, counter) => {
                     return (
                       <div key={stone._id}>
-                        <StoneCard stone={stone} />
+                        <StoneCard
+                          index={index}
+                          count={counter}
+                          stone={stone}
+                          selectedSide={'left'}
+                          selectedRow={selectedRow}
+                          handlePostsUpdate={handlePostsUpdate}
+                        />
                       </div>
                     );
                   })}
@@ -107,10 +116,17 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
                       Добавить
                     </CustomButton>
                   </div>
-                  {right?.map((stone) => {
+                  {right?.map((stone, counter) => {
                     return (
                       <div key={stone._id}>
-                        <StoneCard stone={stone} />
+                        <StoneCard
+                          stone={stone}
+                          count={counter}
+                          selectedSide={'right'}
+                          selectedRow={selectedRow}
+                          handlePostsUpdate={handlePostsUpdate}
+                          index={index}
+                        />
                       </div>
                     );
                   })}

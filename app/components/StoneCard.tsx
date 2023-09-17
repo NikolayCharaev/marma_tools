@@ -13,7 +13,6 @@ import {
 
 import notImage from '@/public/leftovers/not-image.jpg';
 
-
 import Image from 'next/image';
 import CustomButton from './CustomButton';
 
@@ -23,11 +22,33 @@ type IStoneProps = {
   height: number;
 };
 
-function StoneCard({ stone }: IStoneProps) {
-  const { imageUrl, width, height, stoneType, thickness } = stone;
+function StoneCard({
+  stone,
+  selectedSide,
+  selectedRow,
+  index,
+  count,
+  handlePostsUpdate,
+}: IStoneProps) {
+  const { imageUrl, width, height, stoneType, thickness, _id } = stone;
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
+
+  const handleDelete = async (id) => {
+    const responce = await fetch('/api/stones/' + id, {
+      method: 'DELETE',
+      body: JSON.stringify({
+        selectedSide: selectedSide,
+        selectedRow: selectedRow,
+        index: count,
+      }),
+    });
+    if (responce.status === 200) {
+      // Обновление данных после удаления
+      handlePostsUpdate(true);
+    }
+  };
 
   return (
     <>
@@ -41,7 +62,7 @@ function StoneCard({ stone }: IStoneProps) {
           {imageUrl === undefined ? (
             <Image src={notImage} alt="not-image" className="object-cover w-full h-full " />
           ) : (
-            <img  src={imageUrl} alt="poster" className="object-cover w-full h-full " />
+            <img src={imageUrl} alt="poster" className="object-cover w-full h-full " />
           )}
         </CardHeader>
         <CardBody>
@@ -55,7 +76,14 @@ function StoneCard({ stone }: IStoneProps) {
           </Typography>
         </CardBody>
         <CardFooter className="pt-0 flex items-center mt-4">
-          <CustomButton onClick={() => {}}>Удалить</CustomButton>
+          <CustomButton
+            onClick={() => {
+              if (confirm('Вы действительно хотите удалить запись?')) {
+                handleDelete(_id);
+              }
+            }}>
+            Удалить
+          </CustomButton>
           <CustomButton>Редактировать</CustomButton>
         </CardFooter>
       </Card>

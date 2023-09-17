@@ -48,6 +48,8 @@ const Leftovers = () => {
   useEffect(() => {
     // fetchNewStone();
     fetchAllStones();
+
+    handlePostsUpdate(false)
   }, [updatePosts]);
 
   console.log(allStones)
