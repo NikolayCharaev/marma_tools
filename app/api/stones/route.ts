@@ -6,7 +6,7 @@ export const POST = async (req) => {
     await req.json();
   try {
     await connectDB();
-    let existingPyramid = await Pyramid.findOne();
+    let existingPyramid = await Pyramid.findOne({});
     if (!existingPyramid) {
       existingPyramid = new Pyramid({
         rowOne: { right: [] },
@@ -57,3 +57,5 @@ export const GET = async () => {
     return new Response('Произошла ошибка', { status: 500 });
   }
 };
+
+

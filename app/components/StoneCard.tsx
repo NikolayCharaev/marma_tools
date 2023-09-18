@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Card,
   CardHeader,
@@ -7,7 +7,6 @@ import {
   Typography,
   Dialog,
   CardFooter,
-  Button,
   DialogBody,
 } from '@material-tailwind/react';
 
@@ -23,10 +22,13 @@ type IStoneProps = {
 };
 
 function StoneCard({
+  setStoneUpdate,
+  stoneUpdate,
+
   stone,
   selectedSide,
   selectedRow,
-  index,
+  setUpdateForm,
   count,
   handlePostsUpdate,
 }: IStoneProps) {
@@ -48,6 +50,23 @@ function StoneCard({
       // Обновление данных после удаления
       handlePostsUpdate(true);
     }
+  };
+
+  const handleUpdate = async (id) => {
+    // const response = await fetch('/api/stones/' + id, {
+    //   method: 'PATCH',
+    //   body: JSON.stringify({
+    //     selectedSide: selectedSide,
+    //     selectedRow: selectedRow,
+    //     index: count,
+
+    //     stoneWidth: stoneUpdate.stoneWidth,
+    //     stoneHeight: stoneUpdate.stoneHeight,
+    //     stoneImageUrl: stoneUpdate.stoneImageUrl,
+
+    //   }),
+    // });
+
   };
 
   return (
@@ -84,7 +103,14 @@ function StoneCard({
             }}>
             Удалить
           </CustomButton>
-          <CustomButton>Редактировать</CustomButton>
+          <CustomButton
+            onClick={(e) => {
+              e.preventDefault()
+              setUpdateForm(true);
+
+            }}>
+            Редактировать
+          </CustomButton>
         </CardFooter>
       </Card>
       <Dialog

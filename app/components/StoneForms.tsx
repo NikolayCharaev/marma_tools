@@ -4,13 +4,22 @@ import CustomButton from './CustomButton';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import Title from './Title';
 
+import CreateStoneForm from './createStoneForm';
+import UpdateStoneForm from './UpdateStoneForm';
+
 const StoneForm = ({
   setFormModal,
-  formModal,
+  updateForm,
+  setUpdateForm,
   selectedRow,
+  handleStonePacth,
+
+
+  setStoneUpdate,
+  stoneUpdate,
+
   selectedSide,
-  updateList,
-  setUpdateList,
+  count,
   handlePostsUpdate,
 }) => {
   const [stone, setStone] = useState({
@@ -19,6 +28,13 @@ const StoneForm = ({
     stoneWidth: '',
     imageUrl: null as File | null,
     thickness: '', // толщина камня
+  });
+
+  const [updateStone, setUpdateStone] = useState({
+    stoneType: stone?.stoneType,
+    stoneHeight: stone?.stoneHeight,
+    stoneWidth: stone?.stoneWidth,
+    imageUrl: null as File | null,
   });
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -65,13 +81,19 @@ const StoneForm = ({
     }
   };
 
+  const handleUpdate = async (e : any) => {
+
+
+  };
+
   return (
     <div className="p-4">
       <div className="flex justify-between mb-10">
-        <Title>Добавить новый камень</Title>
+        <Title>{!updateForm ? 'Добавить новый камень' : 'Изменить параметры камня'}</Title>
         <CustomButton
           onClick={() => {
             setFormModal(false);
+            setUpdateForm(false);
           }}>
           Закрыть
         </CustomButton>
@@ -85,60 +107,19 @@ const StoneForm = ({
           </div>
         )}
         <div className="w-[700px] shadow-2xl p-20">
-          <form action="" onSubmit={handleSubmit} className="w-full h-full flex flex-col   gap-8">
-            <input
-              required
-              type="text"
-              placeholder="введите название камня"
-              value={stone?.stoneType}
-              onChange={(e) => setStone({ ...stone, stoneType: e.target.value })}
-              className="w-full p-2 border rounded-xl"
-            />
-
-            <div className="flex gap-6 ">
-              <input
-                required
-                className="p-2 border rounded-xl"
-                type="number"
-                placeholder="длина камня"
-                value={stone?.stoneWidth}
-                onChange={(e) => setStone({ ...stone, stoneWidth: e.target.value })}
-              />
-              <input
-                required
-                className="p-2 border rounded-xl"
-                type="number"
-                placeholder="ширина камня"
-                value={stone?.stoneHeight}
-                onChange={(e) => setStone({ ...stone, stoneHeight: e.target.value })}
-              />
-            </div>
-
-            <select
-              className="max-w-[300px]"
-              value={stone?.thickness}
-              onChange={(e) => setStone({ ...stone, thickness: e.target.value })}>
-              <option value="">Выберите толщину камня</option>
-              <option value="20">20mm</option>
-              <option value="30">30mm</option>
-              <option value="40">40mm</option>
-            </select>
-
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files[0];
-                if (file.type === 'image/jpeg' || file.type === 'image/png') {
-                  setStone({ ...stone, imageUrl: e.target.files[0] });
-                } else {
-                  alert('выбрать можно только изображение');
-                  return;
-                }
-              }}
-            />
-
-            <CustomButton>Отправить</CustomButton>
+          <form
+            action=""
+            onSubmit={!updateForm ? handleSubmit : handleUpdate}
+            className="w-full h-full flex flex-col   gap-8">
+            {!updateForm ? (
+              <>
+                <CreateStoneForm stone={stone} setStone={setStone} />
+              </>
+            ) : (
+              <>
+                <UpdateStoneForm setStoneUpdate={setStoneUpdate} stoneUpdate={stoneUpdate} />
+              </>
+            )}
           </form>
         </div>
       </div>

@@ -1,23 +1,39 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Dialog, DialogBody, Card, Typography } from '@material-tailwind/react';
 import Image from 'next/image';
 import StoneCard from './StoneCard';
 import Title from './Title';
 import CustomButton from './CustomButton';
-import StoneForm from './StoneForm';
+import StoneForm from './StoneForms';
 
 function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
-  const [updateList, setUpdateList] = useState(false);
   const { left, right } = card;
 
   const [selectedSide, setSelectedSide] = useState<string>('');
   const [selectedRow, setSelectedRow] = useState<string>('');
   const [formModal, setFormModal] = useState<boolean>(false);
+  const [updateForm, setUpdateForm] = useState<boolean>(false);
+  const [stoneUpdate, setStoneUpdate] = useState({
+    width: '',
+    height: '',
+    imageUrl: '',
+  });
 
-  console.log(selectedSide);
+  const handleStonePacth = (prop) => {
+    setStoneUpdate({
+      ...stoneUpdate,
+      width: prop.width,
+      height: prop.height,
+      imageUrl: prop.imageUrl,
+    });
+  };
+
+  useEffect(() => {
+    console.log('hello');
+  }, [stoneUpdate]);
 
   return (
     <>
@@ -25,7 +41,6 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
         className=" cursor-pointer overflow-hidden transition-opacity hover:opacity-90 w-72 h-[70vh] relative"
         onClick={() => {
           handleOpen();
-
           switch (index) {
             case 1:
               setSelectedRow('rowOne');
@@ -58,15 +73,17 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
         handler={handleOpen}
         className="w-[80vw] h-[80vh] overflow-scroll mx-auto mt-[20px] p-5">
         <DialogBody divider={true} className="p-0 ">
-          {formModal ? (
+          {formModal || updateForm ? (
             <>
               <StoneForm
                 setFormModal={setFormModal}
-                formModal={formModal}
+                setUpdateForm={setUpdateForm}
+                handleStonePacth={handleStonePacth}
+                setStoneUpdate={setStoneUpdate}
+                stoneUpdate={stoneUpdate}
+                updateForm={updateForm}
                 selectedRow={selectedRow}
                 selectedSide={selectedSide}
-                updateList={updateList}
-                setUpdateList={setUpdateList}
                 handlePostsUpdate={handlePostsUpdate}
               />
             </>
@@ -90,9 +107,13 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
                     return (
                       <div key={stone._id}>
                         <StoneCard
-                          index={index}
+                          setStoneUpdate={setStoneUpdate}
+                          stoneUpdate={stoneUpdate}
+
+                          
                           count={counter}
                           stone={stone}
+                          setUpdateForm={setUpdateForm}
                           selectedSide={'left'}
                           selectedRow={selectedRow}
                           handlePostsUpdate={handlePostsUpdate}
@@ -120,12 +141,17 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
                     return (
                       <div key={stone._id}>
                         <StoneCard
-                          stone={stone}
+                          setStoneUpdate={setStoneUpdate}
+                          stoneUpdate={stoneUpdate}
+
+
+
                           count={counter}
+                          stone={stone}
+                          setUpdateForm={setUpdateForm}
                           selectedSide={'right'}
                           selectedRow={selectedRow}
                           handlePostsUpdate={handlePostsUpdate}
-                          index={index}
                         />
                       </div>
                     );
