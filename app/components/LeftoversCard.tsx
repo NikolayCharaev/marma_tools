@@ -129,7 +129,6 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
                       onClick={() => {
                         setSelectedSide('right');
                         setFormModal(true);
-                        handlePostsUpdate(false);
                       }}>
                       Добавить
                     </CustomButton>
@@ -140,9 +139,6 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
                         <StoneCard
                           setStoneUpdate={setStoneUpdate}
                           stoneUpdate={stoneUpdate}
-
-
-
                           count={counter}
                           stone={stone}
                           setUpdateForm={setUpdateForm}
