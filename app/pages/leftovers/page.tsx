@@ -11,48 +11,17 @@ import LeftoversCard from '@/app/components/LeftoversCard';
 
 const images = [rowOneBg, rowTwoBg, rowThreeBg, rowFourBg, rowFiveBg];
 
+import { useStoneStore } from '@/data/stores/useStoneStore';
+
 const Leftovers = () => {
-  const [selectedRow, setSelectedRow] = useState('');
-  const [selectedSide, setSelectedSide] = useState('');
-  const [updatePosts, setUpdatePosts] = useState<boolean>(false);
+  const { allStones, setAllStones, fetchAllStones } = useStoneStore((state) => state);
 
-  const [allStones, setAllStones] = useState([]);
 
-  const handlePostsUpdate = (prop: boolean) => {
-    setUpdatePosts(prop);
-  };
-
-  const fetchNewStone = async () => {
-    await fetch('/api/stones', {
-      method: 'POST',
-      body: JSON.stringify({
-        stoneType: 'новый камень',
-        width: 100,
-        height: 100,
-        imageUrl:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd7tDyrITc4TQQl8XQvQT3R_j5DtSwMExDtRnQZg5-K-BZy_mP6n0sxsw4YWdqiCVIuqQ&usqp=CAU',
-        selectedRow : 'rowTwo',
-        selectedSide : "right",
-      }),
-    });
-    fetchAllStones();
-  };
-  const fetchAllStones = async () => {
-    const response = await fetch('/api/stones', {
-      method: 'GET',
-    });
-    const stones = await response.json();
-    setAllStones(Object.values(stones[0]));
-  };
 
   useEffect(() => {
-    // fetchNewStone();
-    fetchAllStones();
+    fetchAllStones('/api/stones');
+  }, []);
 
-    handlePostsUpdate(false)
-  }, [updatePosts]);
-
-  console.log(allStones)
   return (
     <>
       <Title style="mb-10">Остатки камня</Title>
@@ -62,7 +31,7 @@ const Leftovers = () => {
           return (
             <div key={index}>
               <LeftoversCard
-                handlePostsUpdate={handlePostsUpdate}
+                // handlePostsUpdate={handlePostsUpdate}
                 card={elem}
                 imageBg={imageBg}
                 index={index + 1}

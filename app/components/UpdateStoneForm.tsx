@@ -1,5 +1,16 @@
 import CustomButton from './CustomButton';
+
+import { useStoneStore } from '@/data/stores/useStoneStore';
+
+
+
+
 const UpdateStoneForm = ({ setStoneUpdate, stoneUpdate }) => {
+
+  const {oneStone,setUpdateStone, updateStone} = useStoneStore(state => state)
+
+
+  
   return (
     <>
       <div className="flex gap-6 ">
@@ -9,7 +20,7 @@ const UpdateStoneForm = ({ setStoneUpdate, stoneUpdate }) => {
           type="number"
           placeholder="новая длинна камня"
           value={stoneUpdate?.stoneWidth}
-          onChange={(e) => setStoneUpdate({ ...stoneUpdate, stoneWidth: e.target.value })}
+          onChange={(e) => setUpdateStone({ ...updateStone, stoneWidth: e.target.value })}
         />
         <input
           required
@@ -17,7 +28,7 @@ const UpdateStoneForm = ({ setStoneUpdate, stoneUpdate }) => {
           type="number"
           placeholder="новая ширина камня"
           value={stoneUpdate?.stoneHeight}
-          onChange={(e) => setStoneUpdate({ ...stoneUpdate, stoneHeight: e.target.value })}
+          onChange={(e) => setUpdateStone({ ...updateStone, stoneHeight: e.target.value })}
         />
       </div>
       <input
@@ -26,7 +37,7 @@ const UpdateStoneForm = ({ setStoneUpdate, stoneUpdate }) => {
         onChange={(e) => {
           const file = e.target.files[0];
           if (file.type === 'image/jpeg' || file.type === 'image/png') {
-            setStoneUpdate({ ...stoneUpdate, imageUrl: e.target.files[0] });
+            setUpdateStone({ ...updateStone, imageUrl: e.target.files[0] });
           } else {
             alert('выбрать можно только изображение');
             return;

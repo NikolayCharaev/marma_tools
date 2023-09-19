@@ -6,9 +6,11 @@ import StoneCard from './StoneCard';
 import Title from './Title';
 import CustomButton from './CustomButton';
 import StoneForm from './StoneForms';
-
+import { useStoneStore } from '@/data/stores/useStoneStore';
 function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
   const [open, setOpen] = useState(false);
+  const { allStones, setAllStones, fetchAllStones } = useStoneStore((state) => state);
+
   const handleOpen = () => setOpen((cur) => !cur);
   const { left, right } = card;
 
@@ -78,13 +80,12 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
               <StoneForm
                 setFormModal={setFormModal}
                 setUpdateForm={setUpdateForm}
-                handleStonePacth={handleStonePacth}
                 setStoneUpdate={setStoneUpdate}
                 stoneUpdate={stoneUpdate}
                 updateForm={updateForm}
                 selectedRow={selectedRow}
                 selectedSide={selectedSide}
-                handlePostsUpdate={handlePostsUpdate}
+                // handlePostsUpdate={handlePostsUpdate}
               />
             </>
           ) : (
@@ -97,7 +98,7 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
                       onClick={() => {
                         setSelectedSide('left');
                         setFormModal(true);
-                        handlePostsUpdate(false);
+                        // handlePostsUpdate(false);
                       }}>
                       Добавить
                     </CustomButton>
@@ -107,16 +108,12 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
                     return (
                       <div key={stone._id}>
                         <StoneCard
-                          setStoneUpdate={setStoneUpdate}
-                          stoneUpdate={stoneUpdate}
-
-                          
                           count={counter}
                           stone={stone}
                           setUpdateForm={setUpdateForm}
                           selectedSide={'left'}
                           selectedRow={selectedRow}
-                          handlePostsUpdate={handlePostsUpdate}
+                          // handlePostsUpdate={handlePostsUpdate}
                         />
                       </div>
                     );

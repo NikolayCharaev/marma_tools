@@ -2,25 +2,23 @@
 import { useState } from 'react';
 import CustomButton from './CustomButton';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { useStoneStore } from '@/data/stores/useStoneStore';
 import Title from './Title';
 
 import CreateStoneForm from './createStoneForm';
+
 import UpdateStoneForm from './UpdateStoneForm';
+
 
 const StoneForm = ({
   setFormModal,
   updateForm,
   setUpdateForm,
   selectedRow,
-  handleStonePacth,
-
-
   setStoneUpdate,
   stoneUpdate,
-
   selectedSide,
   count,
-  handlePostsUpdate,
 }) => {
   const [stone, setStone] = useState({
     stoneType: '',
@@ -30,12 +28,7 @@ const StoneForm = ({
     thickness: '', // толщина камня
   });
 
-  const [updateStone, setUpdateStone] = useState({
-    stoneType: stone?.stoneType,
-    stoneHeight: stone?.stoneHeight,
-    stoneWidth: stone?.stoneWidth,
-    imageUrl: null as File | null,
-  });
+  const { fetchAllStones } = useStoneStore((state) => state);
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -77,11 +70,13 @@ const StoneForm = ({
     } finally {
       setLoading(false);
       setFormModal(false);
-      handlePostsUpdate(true);
+      fetchAllStones('/api/stones');
     }
   };
 
-  const handleUpdate = async (e : any) => {
+  const handleUpdate = async (e: any) => {
+    e.preventDefault()
+
 
 
   };

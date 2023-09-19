@@ -10,6 +10,8 @@ import {
   DialogBody,
 } from '@material-tailwind/react';
 
+import { useStoneStore } from '@/data/stores/useStoneStore';
+
 import notImage from '@/public/leftovers/not-image.jpg';
 
 import Image from 'next/image';
@@ -22,17 +24,15 @@ type IStoneProps = {
 };
 
 function StoneCard({
-  setStoneUpdate,
-  stoneUpdate,
-
   stone,
   selectedSide,
   selectedRow,
   setUpdateForm,
   count,
-  handlePostsUpdate,
 }: IStoneProps) {
   const { imageUrl, width, height, stoneType, thickness, _id } = stone;
+
+  const { oneStone, setOneStone, fetchAllStones } = useStoneStore((state) => state);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
@@ -48,26 +48,10 @@ function StoneCard({
     });
     if (responce.status === 200) {
       // Обновление данных после удаления
-      handlePostsUpdate(true);
+      fetchAllStones('/api/stones')
     }
   };
 
-  const handleUpdate = async (id) => {
-    // const response = await fetch('/api/stones/' + id, {
-    //   method: 'PATCH',
-    //   body: JSON.stringify({
-    //     selectedSide: selectedSide,
-    //     selectedRow: selectedRow,
-    //     index: count,
-
-    //     stoneWidth: stoneUpdate.stoneWidth,
-    //     stoneHeight: stoneUpdate.stoneHeight,
-    //     stoneImageUrl: stoneUpdate.stoneImageUrl,
-
-    //   }),
-    // });
-
-  };
 
   return (
     <>
@@ -105,9 +89,9 @@ function StoneCard({
           </CustomButton>
           <CustomButton
             onClick={(e) => {
-              e.preventDefault()
+              e.preventDefault();
               setUpdateForm(true);
-
+              setOneStone({ imageUrl, width, height, stoneType, selectedSide, selectedRow, count });
             }}>
             Редактировать
           </CustomButton>
