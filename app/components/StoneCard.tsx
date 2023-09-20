@@ -91,7 +91,7 @@ function StoneCard({
             onClick={(e) => {
               e.preventDefault();
               setUpdateForm(true);
-              setOneStone({ imageUrl, width, height, stoneType, selectedSide, selectedRow, count });
+              setOneStone({ imageUrl, width, height, stoneType, selectedSide, selectedRow, count, _id });
             }}>
             Редактировать
           </CustomButton>

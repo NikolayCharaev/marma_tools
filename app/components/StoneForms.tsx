@@ -3,12 +3,13 @@ import { useState } from 'react';
 import CustomButton from './CustomButton';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useStoneStore } from '@/data/stores/useStoneStore';
+
+import { addImage } from '@/utils/uploadImage';
 import Title from './Title';
 
 import CreateStoneForm from './createStoneForm';
 
 import UpdateStoneForm from './UpdateStoneForm';
-
 
 const StoneForm = ({
   setFormModal,
@@ -28,25 +29,24 @@ const StoneForm = ({
     thickness: '', // толщина камня
   });
 
+  const { updateStone, oneStone } = useStoneStore((stone) => stone);
+  const [updateImageUrl, setUpdateImageUrl] = useState('');
+
   const { fetchAllStones } = useStoneStore((state) => state);
 
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e) => {
+    console.log(stone.imageUrl);
     if (stone?.imageUrl !== undefined) {
       try {
         e.preventDefault();
         setLoading(true);
-        const formData = new FormData();
-        formData.append('file', stone?.imageUrl);
-        formData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_SECRET);
 
-        const fetchImage = await fetch('https://api.cloudinary.com/v1_1/dz6309zzc/image/upload', {
-          method: 'POST',
-          body: formData,
-        });
-        const data = await fetchImage.json();
-        setStone((stone.imageUrl = data.secure_url));
+        const setNewImage = await addImage(stone?.imageUrl);
+        if (setNewImage) {
+          setStone((stone.imageUrl = setNewImage));
+        }
       } catch (err) {
         console.error('Error uploading image:', err);
       }
@@ -73,12 +73,46 @@ const StoneForm = ({
       fetchAllStones('/api/stones');
     }
   };
-
   const handleUpdate = async (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
+    console.log(selectedSide);
 
+    const { stoneWidth, stoneHeight, imageUrl } = updateStone;
 
+    if (imageUrl !== undefined) {
+      try {
+        e.preventDefault();
+        setLoading(true);
+        const setNewImage = await addImage(stone?.imageUrl);
+        if (setNewImage) {
+          setUpdateImageUrl((updateStone.imageUrl = setNewImage));
+        }
+      } catch (err) {
+        console.error('Error uploading image:', err);
+      }
+    }
 
+    try {
+      await fetch('/api/stones/' + oneStone._id, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          stoneWidth: stoneWidth,
+          stoneHeight: stoneHeight,
+          imageUrl: imageUrl,
+          selectedRow,
+          selectedSide: oneStone.selectedSide,
+          index: count,
+          id: oneStone._id,
+        }),
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      console.log('finally');
+      setLoading(false);
+      setFormModal(false);
+      fetchAllStones('/api/stones');
+    }
   };
 
   return (

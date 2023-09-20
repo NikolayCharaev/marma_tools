@@ -25,12 +25,20 @@ export const DELETE = async (req, { params }) => {
 export const PATCH = async (req, { params }) => {
   await connectDB();
   try {
-    // const { selectedRow, selectedSide, count } = await req.json();
-    // const pyramid = await Pyramid.findOne({});
-    // const stone = pyramid[selectedRow][selectedSide];
-    // return new Response(JSON.stringify(stone), { status: 200 });
+    const { selectedRow, selectedSide, index, imageUrl, stoneWidth, stoneHeight, _id } = await req.json();
+    const pyramid = await Pyramid.findOne({});
+    const stone = pyramid[selectedRow][selectedSide]; // объект изменяемого камня
 
-    return new Response('asdasd', { status: 200 });
+    stone.stoneType = 'asd';
+    stone.thickness = '20';
+    stone.id = _id;
+    stone.width = stoneWidth;
+    stone.height = stoneHeight;
+    stone.imageUrl = imageUrl;
+
+    await pyramid.save();
+
+    return new Response(stone, { status: 200 });
   } catch (err) {
     console.log(err);
     return new Response('Произошла ошибка, повторите попытку позже', { status: 500 });
