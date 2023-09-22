@@ -37,7 +37,6 @@ const StoneForm = ({
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e) => {
-    console.log(stone.imageUrl);
     if (stone?.imageUrl !== undefined) {
       try {
         e.preventDefault();
@@ -75,8 +74,6 @@ const StoneForm = ({
   };
   const handleUpdate = async (e: any) => {
     e.preventDefault();
-    console.log(selectedSide);
-
     const { stoneWidth, stoneHeight, imageUrl } = updateStone;
 
     if (imageUrl !== undefined) {

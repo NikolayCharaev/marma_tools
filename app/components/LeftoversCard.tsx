@@ -42,7 +42,6 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
       <Card
         className=" cursor-pointer overflow-hidden transition-opacity hover:opacity-90 w-72 h-[70vh] relative"
         onClick={() => {
-          console.log(selectedSide)
           handleOpen();
           switch (index) {
             case 1:
@@ -98,7 +97,6 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
                       onClick={() => {
                         setSelectedSide('left');
                         setFormModal(true);
-                        // handlePostsUpdate(false);
                       }}>
                       Добавить
                     </CustomButton>
@@ -113,7 +111,6 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
                           setUpdateForm={setUpdateForm}
                           selectedSide={'left'}
                           selectedRow={selectedRow}
-                          // handlePostsUpdate={handlePostsUpdate}
                         />
                       </div>
                     );
