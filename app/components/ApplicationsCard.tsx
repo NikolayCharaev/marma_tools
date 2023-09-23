@@ -1,14 +1,25 @@
 'use client';
-import { useState } from 'react';
+import { useState, FC } from 'react';
 import { Card, CardHeader, CardBody, CardFooter, Typography } from '@material-tailwind/react';
 import notImage from '@/public/leftovers/not-image.jpg';
 import Image from 'next/image';
 import CustomButton from './CustomButton';
 import { useApplicationStore } from '@/data/stores/applicationStore';
 
-const ApplicationsCard = ({ post, formModal, setFormModal, typeModal, setTypeModal }) => {
+interface IPostProps {
+  post: {
+    more: string;
+    date: string;
+    imageUrl: string;
+    applicationName: string;
+    _id: string;
+  };
+  formModal: boolean;
+  setFormModal: (value : boolean) => void;
+}
+const ApplicationsCard: FC<IPostProps> = ({ post, formModal, setFormModal }) => {
   const { fetchAllApplications } = useApplicationStore();
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: string) => {
     try {
       if (confirm('удалить пост?')) {
         const deletePost = await fetch('/api/applications/' + id, {
@@ -22,11 +33,11 @@ const ApplicationsCard = ({ post, formModal, setFormModal, typeModal, setTypeMod
     }
   };
 
-  const handleUpdate = (id) => {};
+  // const handleUpdate = (id) => {};
 
   const { more, date, imageUrl, applicationName, _id } = post;
   return (
-    <Card className="w-[24rem] h-[24rem] overflow-hidden ">
+    <Card className="w-full h-[450px] overflow-hidden shadow-xl ">
       <CardHeader
         floated={false}
         shadow={false}
@@ -42,13 +53,13 @@ const ApplicationsCard = ({ post, formModal, setFormModal, typeModal, setTypeMod
           <Image
             src={notImage}
             alt="not-image"
-            className="object-cover w-full h-full max-w-96 max-h-52"
+            className="object-cover w-full h-full "
           />
         ) : (
           <img
             src={imageUrl}
             alt="poster"
-            className="object-cover w-full h-full  max-w-96 max-h-52"
+            className="object-cover w-full h-64 "
           />
         )}
       </CardHeader>
@@ -64,7 +75,12 @@ const ApplicationsCard = ({ post, formModal, setFormModal, typeModal, setTypeMod
       </CardBody>
       <CardFooter className="flex items-center justify-between p-2">
         <div className="flex justify-between mb-5">
-          <CustomButton onClick={() => handleDelete(_id)}>Удалить</CustomButton>
+          <CustomButton
+            onClick={() => {
+              handleDelete(_id);
+            }}>
+            Удалить
+          </CustomButton>
           <CustomButton
             onClick={() => {
               setFormModal(true);

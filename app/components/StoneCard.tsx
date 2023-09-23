@@ -23,13 +23,7 @@ type IStoneProps = {
   height: number;
 };
 
-function StoneCard({
-  stone,
-  selectedSide,
-  selectedRow,
-  setUpdateForm,
-  count,
-}: IStoneProps) {
+function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: IStoneProps) {
   const { imageUrl, width, height, stoneType, thickness, _id } = stone;
 
   const { oneStone, setOneStone, fetchAllStones } = useStoneStore((state) => state);
@@ -47,11 +41,9 @@ function StoneCard({
       }),
     });
     if (responce.status === 200) {
-      // Обновление данных после удаления
-      fetchAllStones('/api/stones')
+      fetchAllStones('/api/stones');
     }
   };
-
 
   return (
     <>
@@ -91,7 +83,16 @@ function StoneCard({
             onClick={(e) => {
               e.preventDefault();
               setUpdateForm(true);
-              setOneStone({ imageUrl, width, height, stoneType, selectedSide, selectedRow, count, _id });
+              setOneStone({
+                imageUrl,
+                width,
+                height,
+                stoneType,
+                selectedSide,
+                selectedRow,
+                count,
+                _id,
+              });
             }}>
             Редактировать
           </CustomButton>

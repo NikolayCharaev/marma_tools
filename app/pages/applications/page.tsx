@@ -7,6 +7,7 @@ import CustomButton from '@/app/components/CustomButton';
 
 import ApplicationsForm from '@/app/components/ApplicationsForm';
 import ApplicationsCard from '@/app/components/ApplicationsCard';
+import App from '@/node_modules/next/app';
 
 interface IPost {
   imageUrl: any;
@@ -29,36 +30,37 @@ const Applications = () => {
 
   return (
     <>
-      <Title style="mb-10">Список заявок</Title>
-
-      <div className="mb-10 relative ">
-        <div className="mb-20 h-[700px] flex flex-wrap gap-7 justify-start overflow-scroll">
-          {allApplications.map((post, index) => {
+      <Title style="mb-5">Список заявок на покупку расходников</Title>
+      <div className="mb-10 relative  p-3">
+        <div className="mb-5 h-[760px]  grid grid-cols-4 gap-7 overflow-scroll border border-stone-800 rounded-sm    p-5 ">
+          {allApplications.map((post) => {
+            console.log(post);
             return (
               <ApplicationsCard
                 post={post}
-                key={post._id}
                 formModal={formModal}
                 setFormModal={setFormModal}
-                typeModal={typeModal}
-                setTypeModal={setTypeModal}
+                key={post._id}
               />
             );
           })}
         </div>
 
         <ApplicationsForm
+          
           type={typeModal}
           formModal={formModal}
           setFormModal={setFormModal}
           loading={loading}
           setLoading={setLoading}
         />
-        <CustomButton onClick={() => {
-          setFormModal(true)
-          setTypeModal('Добавить новую запись')
-        }}>Добавить новую заявку</CustomButton>
       </div>
+      <CustomButton
+        onClick={() => {
+          setFormModal(true);
+        }}>
+        Добавить новую заявку
+      </CustomButton>
     </>
   );
 };
