@@ -20,13 +20,20 @@ interface IPost {
 const Applications = () => {
   const { fetchAllApplications, allApplications } = useApplicationStore((state) => state);
 
-  const [formModal, setFormModal] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [formModal, setFormModal] = useState<boolean>(false); //открытие и закрытие формы
+  const [loading, setLoading] = useState<boolean>(false); // прелоадер загрузки
   const [typeModal, setTypeModal] = useState<string>('');
+  const [isEdited, setIsEdited] = useState(false);
+  const [postId, setPostId] = useState('');
 
   useEffect(() => {
     fetchAllApplications('/api/applications');
   }, []);
+
+const handlePostId = (value) => {
+  
+    setPostId(value);
+  };
 
   return (
     <>
@@ -34,9 +41,12 @@ const Applications = () => {
       <div className="mb-10 relative  p-3">
         <div className="mb-5 h-[760px]  grid grid-cols-4 gap-7 overflow-scroll border border-stone-800 rounded-sm    p-5 ">
           {allApplications.map((post) => {
-            console.log(post);
             return (
               <ApplicationsCard
+                isEdited={isEdited}
+                handlePostId={handlePostId}
+                setIsEdited={setIsEdited}
+                setTypeModal={setTypeModal}
                 post={post}
                 formModal={formModal}
                 setFormModal={setFormModal}
@@ -47,7 +57,10 @@ const Applications = () => {
         </div>
 
         <ApplicationsForm
-          
+          isEdited={isEdited}
+          postId={postId}
+          setIsEdited={setIsEdited}
+          typeModal={typeModal}
           type={typeModal}
           formModal={formModal}
           setFormModal={setFormModal}
@@ -58,6 +71,8 @@ const Applications = () => {
       <CustomButton
         onClick={() => {
           setFormModal(true);
+          setTypeModal('Добавить новую заявку');
+          setIsEdited(false);
         }}>
         Добавить новую заявку
       </CustomButton>

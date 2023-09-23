@@ -33,10 +33,6 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
     });
   };
 
-  useEffect(() => {
-    console.log('hello');
-  }, [stoneUpdate]);
-
   return (
     <>
       <Card

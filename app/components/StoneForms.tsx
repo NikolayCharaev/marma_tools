@@ -10,6 +10,7 @@ import Title from './Title';
 import CreateStoneForm from './createStoneForm';
 
 import UpdateStoneForm from './UpdateStoneForm';
+import Preloader from './Preloader';
 
 const StoneForm = ({
   setFormModal,
@@ -105,7 +106,6 @@ const StoneForm = ({
     } catch (err) {
       console.log(err);
     } finally {
-      console.log('finally');
       setLoading(false);
       setFormModal(false);
       fetchAllStones('/api/stones');
@@ -126,12 +126,7 @@ const StoneForm = ({
       </div>
 
       <div className="w-full flex flex-col items-center mt-[200px]">
-        {loading && (
-          <div className="flex flex-col gap-4 justify-center items-center z-10 text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl p-3 rounded-2xl absolute transition w-[400px] top-[50px]">
-            <AiOutlineLoading3Quarters className="animate-spin rounded-full" size={40} />
-            <p className="text-center">Идет загрузка поста...</p>
-          </div>
-        )}
+        {loading && <Preloader />}
         <div className="w-[700px] shadow-2xl p-20">
           <form
             action=""

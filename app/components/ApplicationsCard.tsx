@@ -13,12 +13,25 @@ interface IPostProps {
     imageUrl: string;
     applicationName: string;
     _id: string;
+    setTypeModal: (value: string) => void;
+    setIsEdited: (value: boolean) => void;
+    isEdited: boolean;
   };
   formModal: boolean;
-  setFormModal: (value : boolean) => void;
+  setFormModal: (value: boolean) => void;
 }
-const ApplicationsCard: FC<IPostProps> = ({ post, formModal, setFormModal }) => {
+const ApplicationsCard: FC<IPostProps> = ({
+  post,
+  formModal,
+  setFormModal,
+  setTypeModal,
+  setIsEdited,
+  isEdited,
+  handlePostId
+}) => {
   const { fetchAllApplications } = useApplicationStore();
+  const { more, date, imageUrl, applicationName, _id } = post;
+
   const handleDelete = async (id: string) => {
     try {
       if (confirm('удалить пост?')) {
@@ -33,9 +46,6 @@ const ApplicationsCard: FC<IPostProps> = ({ post, formModal, setFormModal }) => 
     }
   };
 
-  // const handleUpdate = (id) => {};
-
-  const { more, date, imageUrl, applicationName, _id } = post;
   return (
     <Card className="w-full h-[450px] overflow-hidden shadow-xl ">
       <CardHeader
@@ -50,17 +60,9 @@ const ApplicationsCard: FC<IPostProps> = ({ post, formModal, setFormModal }) => 
           {date}
         </Typography>
         {imageUrl === null ? (
-          <Image
-            src={notImage}
-            alt="not-image"
-            className="object-cover w-full h-full "
-          />
+          <Image src={notImage} alt="not-image" className="object-cover w-full h-full " />
         ) : (
-          <img
-            src={imageUrl}
-            alt="poster"
-            className="object-cover w-full h-64 "
-          />
+          <img src={imageUrl} alt="poster" className="object-cover w-full h-64 " />
         )}
       </CardHeader>
       <CardBody className="p-2">
@@ -84,8 +86,9 @@ const ApplicationsCard: FC<IPostProps> = ({ post, formModal, setFormModal }) => 
           <CustomButton
             onClick={() => {
               setFormModal(true);
-              setTypeModal('Изменить созданную запись');
-              handleUpdate(_id);
+              setTypeModal('Изменить запись');
+              setIsEdited(true);
+              handlePostId(_id)
             }}>
             Редактировать
           </CustomButton>
