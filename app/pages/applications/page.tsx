@@ -18,7 +18,7 @@ interface IPost {
 }
 
 const Applications = () => {
-  const { fetchAllApplications, allApplications } = useApplicationStore((state) => state);
+  const { fetchAllApplications, allApplications} = useApplicationStore((state) => state);
 
   const [formModal, setFormModal] = useState<boolean>(false); //открытие и закрытие формы
   const [loading, setLoading] = useState<boolean>(false); // прелоадер загрузки

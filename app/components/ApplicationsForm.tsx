@@ -31,7 +31,8 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
   setLoading,
   type,
 }) => {
-  const { fetchAllApplications, allApplications } = useApplicationStore((state) => state);
+  const { fetchAllApplications, allApplications, fetchPostApplication, fetchPatchApplication } =
+    useApplicationStore((state) => state);
   const [postModel, setPostModel] = useState({
     imageUrl: null as File | null,
     date: getCurrentDateTime(),
@@ -42,7 +43,6 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     const setNewImage = await addImage(postModel?.imageUrl);
     if (postModel?.imageUrl !== null) {
       try {
@@ -54,18 +54,9 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
         console.error('Error uploading image:', err);
       }
     }
-
     try {
-      await fetch('/api/applications', {
-        method: 'POST',
-        body: JSON.stringify({
-          applicationName: postModel.applicationName,
-          more: postModel.more,
-          imageUrl: postModel.imageUrl,
-          date: postModel.date,
-        }),
-      });
-
+ 
+      fetchPostApplication('/api/applications', postModel);
       // Обновление состояния postModel
       setPostModel({
         imageUrl: null,
@@ -78,7 +69,6 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
     } finally {
       setLoading(false);
       setFormModal(false);
-      fetchAllApplications('/api/applications');
     }
   };
 
@@ -98,22 +88,18 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
     }
 
     try {
-      await fetch('/api/applications/' + postId, {
-        method: 'PATCH',
-        body: JSON.stringify({
-          imageUrl: postModel.imageUrl,
-          date: getCurrentDateTime(),
-          applicationName: postModel.applicationName,
-          more: postModel.more,
-          id: postId,
-        }),
+      fetchPatchApplication(`/api/applications/${postId}`, postModel, postId);
+      setPostModel({
+        imageUrl: null,
+        date: getCurrentDateTime(),
+        applicationName: '',
+        more: '',
       });
     } catch (err) {
       console.log(err);
     } finally {
       setLoading(false);
       setFormModal(false);
-      fetchAllApplications('/api/applications');
     }
   };
 
