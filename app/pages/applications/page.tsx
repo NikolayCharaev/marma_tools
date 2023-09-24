@@ -7,31 +7,23 @@ import CustomButton from '@/app/components/CustomButton';
 
 import ApplicationsForm from '@/app/components/ApplicationsForm';
 import ApplicationsCard from '@/app/components/ApplicationsCard';
-import App from '@/node_modules/next/app';
-
-interface IPost {
-  imageUrl: any;
-  date: string;
-  applicationName: string;
-  more?: string;
-  _id: string;
-}
 
 const Applications = () => {
-  const { fetchAllApplications, allApplications} = useApplicationStore((state) => state);
+  const { fetchAllApplications, allApplications } = useApplicationStore((state) => state);
 
   const [formModal, setFormModal] = useState<boolean>(false); //открытие и закрытие формы
   const [loading, setLoading] = useState<boolean>(false); // прелоадер загрузки
   const [typeModal, setTypeModal] = useState<string>('');
   const [isEdited, setIsEdited] = useState(false);
+  const [pageType, setPageType] = useState<string>('');
   const [postId, setPostId] = useState('');
 
   useEffect(() => {
+    setPageType('applications');
     fetchAllApplications('/api/applications');
   }, []);
 
-const handlePostId = (value) => {
-  
+  const handlePostId = (value) => {
     setPostId(value);
   };
 
@@ -39,10 +31,11 @@ const handlePostId = (value) => {
     <>
       <Title style="mb-5">Список заявок на покупку расходников</Title>
       <div className="mb-10 relative  p-3">
-        <div className="mb-5 h-[760px]  grid grid-cols-4 gap-7 overflow-scroll border border-stone-800 rounded-sm    p-5 ">
+        <div className="mb-5 h-[760px] grid grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 gap-7 overflow-scroll rounded-sm  ">
           {allApplications.map((post) => {
             return (
               <ApplicationsCard
+                pageType={pageType}
                 isEdited={isEdited}
                 handlePostId={handlePostId}
                 setIsEdited={setIsEdited}
@@ -57,6 +50,7 @@ const handlePostId = (value) => {
         </div>
 
         <ApplicationsForm
+          pageType={pageType}
           isEdited={isEdited}
           postId={postId}
           setIsEdited={setIsEdited}

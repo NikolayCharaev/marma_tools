@@ -18,6 +18,7 @@ interface IApplicationsFormProps {
   setIsEdited: (value: boolean) => void;
   isEdited: boolean;
   postId: string;
+  pageType: string
 }
 
 const ApplicationsForm: FC<IApplicationsFormProps> = ({
@@ -28,6 +29,7 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
   isEdited,
   postId,
   loading,
+  pageType,
   setLoading,
   type,
 }) => {
@@ -56,7 +58,7 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
     }
     try {
  
-      fetchPostApplication('/api/applications', postModel);
+      fetchPostApplication(`/api/${pageType}`, postModel);
       // Обновление состояния postModel
       setPostModel({
         imageUrl: null,
@@ -88,7 +90,7 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
     }
 
     try {
-      fetchPatchApplication(`/api/applications/${postId}`, postModel, postId);
+      fetchPatchApplication(`/api/${pageType}/${postId}`, postModel, postId);
       setPostModel({
         imageUrl: null,
         date: getCurrentDateTime(),

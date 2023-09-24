@@ -16,6 +16,7 @@ interface IPostProps {
     setTypeModal: (value: string) => void;
     setIsEdited: (value: boolean) => void;
     isEdited: boolean;
+    pageType: string;
   };
   formModal: boolean;
   setFormModal: (value: boolean) => void;
@@ -26,8 +27,9 @@ const ApplicationsCard: FC<IPostProps> = ({
   setFormModal,
   setTypeModal,
   setIsEdited,
+  pageType,
   isEdited,
-  handlePostId
+  handlePostId,
 }) => {
   const { fetchAllApplications } = useApplicationStore();
   const { more, date, imageUrl, applicationName, _id } = post;
@@ -35,14 +37,14 @@ const ApplicationsCard: FC<IPostProps> = ({
   const handleDelete = async (id: string) => {
     try {
       if (confirm('удалить пост?')) {
-        const deletePost = await fetch('/api/applications/' + id, {
+        const deletePost = await fetch(`/api/${pageType}/` + id, {
           method: 'DELETE',
         });
       }
     } catch (err) {
       console.log(err);
     } finally {
-      fetchAllApplications('/api/applications');
+      fetchAllApplications(`/api/${pageType}`);
     }
   };
 
@@ -88,7 +90,7 @@ const ApplicationsCard: FC<IPostProps> = ({
               setFormModal(true);
               setTypeModal('Изменить запись');
               setIsEdited(true);
-              handlePostId(_id)
+              handlePostId(_id);
             }}>
             Редактировать
           </CustomButton>
