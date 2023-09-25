@@ -16,6 +16,9 @@ const config: Config = {
           '100': '#ffffff',
         },
       },
+      gridTemplateColumns : {
+        wrap: 'repeat( auto-fit, minmax(230px, 1fr) );'
+      },
       container: {
         center: true,
         padding: '1rem',
@@ -34,6 +37,7 @@ const config: Config = {
         md: { max: '1060px' },
         xl: { max: '1280px' },
         '2xl': '1400px',
+        '3xl': {max : '1500px'},
       },
     },
   },

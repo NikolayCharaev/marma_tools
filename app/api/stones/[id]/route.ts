@@ -1,7 +1,7 @@
 import Pyramid from '@/models/leftovers';
 import { connectDB } from '@/utils/database';
 
-export const DELETE = async (req, { params }) => {
+export const DELETE = async (req : any,) => {
   await connectDB();
   try {
     const { selectedRow, selectedSide, index } = await req.json();
@@ -22,7 +22,7 @@ export const DELETE = async (req, { params }) => {
   }
 };
 
-export const PATCH = async (req, { params }) => {
+export const PATCH = async (req : any) => {
   await connectDB();
   try {
     const { selectedRow, selectedSide, index, imageUrl, stoneWidth, stoneHeight, _id } = await req.json();

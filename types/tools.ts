@@ -6,3 +6,4 @@ export type NavDataProps = {
   imageUrl: StaticImageData;
   description?: string;
 };
+

@@ -1,9 +1,9 @@
 import { connectDB } from '@/utils/database';
-// import Re from '@/models/applications';
 import Repair from '@/models/repairs';
 
-export const DELETE = async (req, { params }) => {
+export const DELETE = async (req : any, { params}) => {
   await connectDB();
+  console.log(params)
   try {
     const postId = await params.id;
     const deletedPost = await Repair.findByIdAndDelete(postId);
@@ -17,7 +17,7 @@ export const DELETE = async (req, { params }) => {
   }
 };
 
-export const PATCH = async (req, { params }) => {
+export const PATCH = async (req : any, { params }) => {
   await connectDB();
   const { more, date, imageUrl, applicationName, id } = await req.json();
   try {

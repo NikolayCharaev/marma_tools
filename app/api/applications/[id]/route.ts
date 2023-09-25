@@ -1,7 +1,7 @@
 import { connectDB } from '@/utils/database';
 import Application from '@/models/applications';
 
-export const DELETE = async (req, { params }) => {
+export const DELETE = async (req : any, { params }) => {
   await connectDB();
   try {
     const postId = await params.id;
@@ -17,7 +17,7 @@ export const DELETE = async (req, { params }) => {
 };
 
 
-export const PATCH = async (req, {params}) => { 
+export const PATCH = async (req : any, {params}) => { 
     await connectDB()
     const {more,date, imageUrl,applicationName, id} = await req.json()
     try{ 
