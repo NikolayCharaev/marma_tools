@@ -1,7 +1,7 @@
 import { Schema, models, model } from 'mongoose';
 
 const RepairsSchema = new Schema({
-  repairName: {
+  applicationName: {
     type: String,
     required: [true, 'введите название'],
   },
@@ -16,6 +16,6 @@ const RepairsSchema = new Schema({
   },
 });
 
-const Repair = models.Application || model('Application', RepairsSchema);
+const Repair = models.Repair || model('Repair', RepairsSchema);
 
 export default Repair;

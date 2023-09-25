@@ -15,6 +15,7 @@ const Nav = () => {
           alt="logo"
           width={187}
           height={72}
+          className='sm:max-w-[130px]'
         />
       </Link>
       <Link href="../pages/admin-dashboard">

@@ -7,6 +7,10 @@ import { devtools } from 'zustand/middleware';
 export const useApplicationStore = create(
   devtools((set, get) => ({
     allApplications: [],
+    pageType : '',
+    setPageType : (page : string) => { 
+      set({pageType : page})
+    },
     fetchAllApplications: async (pond: string) => {
       const response = await fetch(pond);
       const applications = await response.json();
@@ -22,8 +26,9 @@ export const useApplicationStore = create(
           date: post.date,
         }),
       });
+      // const currentPageType = get().pageType;
       // Вызываем fetchAllApplications после добавления нового поста
-      get().fetchAllApplications('/api/applications/');
+      get().fetchAllApplications(`/api/${get().pageType}/`);
     },
     fetchPatchApplication: async (pond: string, post, postId) => {
       await fetch(pond, {
@@ -37,7 +42,7 @@ export const useApplicationStore = create(
         }),
       });
       // Вызываем fetchAllApplications после изменения поста
-      get().fetchAllApplications('/api/applications/');
+      get().fetchAllApplications(`/api/${get().pageType}/`);
     },
   })),
 );

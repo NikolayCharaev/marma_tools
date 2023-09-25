@@ -78,7 +78,7 @@ const ApplicationsCard: FC<IPostProps> = ({
         )}
       </CardBody>
       <CardFooter className="flex items-center justify-between p-2">
-        <div className="flex justify-between mb-5">
+        <div className="flex justify-between mb-5 lg:flex-col mt:flex-row">
           <CustomButton
             onClick={() => {
               handleDelete(_id);

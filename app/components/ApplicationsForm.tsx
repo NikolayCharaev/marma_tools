@@ -57,7 +57,6 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
       }
     }
     try {
- 
       fetchPostApplication(`/api/${pageType}`, postModel);
       // Обновление состояния postModel
       setPostModel({

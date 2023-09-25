@@ -9,13 +9,14 @@ import ApplicationsForm from '@/app/components/ApplicationsForm';
 import ApplicationsCard from '@/app/components/ApplicationsCard';
 
 const Applications = () => {
-  const { fetchAllApplications, allApplications } = useApplicationStore((state) => state);
+  const { fetchAllApplications, allApplications, pageType, setPageType } = useApplicationStore(
+    (state) => state,
+  );
 
   const [formModal, setFormModal] = useState<boolean>(false); //открытие и закрытие формы
   const [loading, setLoading] = useState<boolean>(false); // прелоадер загрузки
   const [typeModal, setTypeModal] = useState<string>('');
   const [isEdited, setIsEdited] = useState(false);
-  const [pageType, setPageType] = useState<string>('');
   const [postId, setPostId] = useState('');
 
   useEffect(() => {
@@ -31,7 +32,7 @@ const Applications = () => {
     <>
       <Title style="mb-5">Список заявок на покупку расходников</Title>
       <div className="mb-10 relative  p-3">
-        <div className="mb-5 h-[760px] grid grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 gap-7 overflow-scroll rounded-sm  ">
+        <div className="mb-5 h-[760px] grid grid-cols-4 lg:grid-cols-2 mt:grid-cols-1 gap-7 overflow-scroll rounded-sm  pb-4 ">
           {allApplications.map((post) => {
             return (
               <ApplicationsCard
