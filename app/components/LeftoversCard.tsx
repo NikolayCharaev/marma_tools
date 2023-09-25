@@ -1,5 +1,5 @@
 'use client';
-import {  useState } from 'react';
+import { useState } from 'react';
 import { Dialog, DialogBody, Card, Typography } from '@material-tailwind/react';
 import Image from 'next/image';
 import StoneCard from './StoneCard';
@@ -7,7 +7,7 @@ import Title from './Title';
 import CustomButton from './CustomButton';
 import StoneForm from './StoneForms';
 
-
+import { AiFillFileAdd } from 'react-icons/ai';
 
 function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
   const [open, setOpen] = useState(false);
@@ -60,7 +60,7 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
         <Image alt="image" className="w-full h-full object-cover " src={imageBg} />
 
         <Typography
-          className="absolute top-[20px] left-[20px] p-2 bg-white rounded-xl"
+          className="absolute top-[20px] left-[20px] p-2 bg-white rounded-xl "
           variant="h1">
           Ряд {index}
         </Typography>
@@ -87,14 +87,14 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
             <div className="flex justify-between">
               {card.left && (
                 <div className="">
-                  <div className="flex justify-between mb-3 gap-5">
-                    <Title style="text-left">левая сторона</Title>
+                  <div className="flex justify-between mt:justify-start mt:gap-2 mt:items-center mb-3 gap-5">
+                    <Title style="text-left ">левая сторона</Title>
                     <CustomButton
                       onClick={() => {
                         setSelectedSide('left');
                         setFormModal(true);
                       }}>
-                      Добавить
+                      <AiFillFileAdd />
                     </CustomButton>
                   </div>
 
@@ -113,17 +113,17 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
                   })}
                 </div>
               )}
-              <p>Ряд {index}</p>
+              <p className="mt:hidden">Ряд {index}</p>
               {card.right && (
                 <div className="">
-                  <div className="flex justify-between mb-3 gap-5">
-                    <Title style="text-left">правая сторона</Title>
+                  <div className="flex justify-between mt:justify-start mt:gap-2 mt:items-center mb-3 gap-5">
+                    <Title style="text-left ">правая сторона</Title>
                     <CustomButton
                       onClick={() => {
                         setSelectedSide('right');
                         setFormModal(true);
                       }}>
-                      Добавить
+                      <AiFillFileAdd />
                     </CustomButton>
                   </div>
                   {right?.map((stone, counter) => {

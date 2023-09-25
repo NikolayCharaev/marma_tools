@@ -9,6 +9,7 @@ import {
   CardFooter,
   DialogBody,
 } from '@material-tailwind/react';
+import {AiFillDelete, AiFillEdit} from 'react-icons/ai'
 
 import { useStoneStore } from '@/data/stores/useStoneStore';
 
@@ -47,24 +48,24 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
 
   return (
     <>
-      <Card className="max-w-[24rem] overflow-hidden cursor-pointer hover:opacity-90 transition mb-10">
+      <Card className="max-w-[24rem] md:max-w-[18rem]  overflow-hidden cursor-pointer hover:opacity-90 transition mb-10 mt:w-32">
         <CardHeader
           floated={false}
           shadow={false}
           color="transparent"
-          className="m-0 rounded-none h-[25rem]  object-cover"
+          className="m-0 rounded-none h-[25rem] sm:h-72 mt:h-32 object-cover"
           onClick={handleOpen}>
           {imageUrl === undefined ? (
             <Image src={notImage} alt="not-image" className="object-cover w-full h-full " />
           ) : (
-            <img src={imageUrl} alt="poster" className="object-cover w-full h-full " />
+            <img src={imageUrl} alt="poster" className="object-cover w-full h-full  " />
           )}
         </CardHeader>
         <CardBody>
-          <Typography variant="h4" color="blue-gray">
+          <Typography variant="h4" color="blue-gray" className='sm:text-lg'>
             {stoneType}
           </Typography>
-          <Typography variant="lead" color="gray" className="mt-3 font-normal">
+          <Typography variant="lead" color="gray" className="mt-3 font-normal sm:text-sm mt:text-xs">
             <p>Длинна камня: {width} мм</p>
             <p>Высота камня: {height} мм</p>
             <p>Толщина камня: {thickness} мм</p>
@@ -77,7 +78,7 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
                 handleDelete(_id);
               }
             }}>
-            Удалить
+            <AiFillDelete/>
           </CustomButton>
           <CustomButton
             onClick={(e) => {
@@ -94,7 +95,7 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
                 _id,
               });
             }}>
-            Редактировать
+            <AiFillEdit/>
           </CustomButton>
         </CardFooter>
       </Card>
