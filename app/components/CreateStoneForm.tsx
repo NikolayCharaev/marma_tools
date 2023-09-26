@@ -1,7 +1,7 @@
 import React from 'react';
 import CustomButton from './CustomButton';
 
-const CreateStoneForm = ({stone, setStone}) => {
+const CreateStoneForm = ({ stone, setStone }) => {
   return (
     <>
       <input
@@ -13,12 +13,12 @@ const CreateStoneForm = ({stone, setStone}) => {
         className="w-full p-2 border rounded-xl"
       />
 
-      <div className="flex gap-6 ">
+      <div className="flex gap-6 sm:flex-col xs:gap-3">
         <input
           required
           className="p-2 border rounded-xl"
           type="number"
-          placeholder="длина камня"
+          placeholder="длинна камня"
           value={stone?.stoneWidth}
           onChange={(e) => setStone({ ...stone, stoneWidth: e.target.value })}
         />

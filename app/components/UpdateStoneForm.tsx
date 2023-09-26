@@ -13,7 +13,7 @@ const UpdateStoneForm = ({ setStoneUpdate, stoneUpdate }) => {
   
   return (
     <>
-      <div className="flex gap-6 ">
+      <div className="flex gap-6 lg:flex-col">
         <input
           required
           className="p-2 border rounded-xl"

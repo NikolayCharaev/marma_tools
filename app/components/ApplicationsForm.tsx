@@ -105,10 +105,10 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
   };
 
   return (
-    <div className="absolute top-0 left-1/2 ransform -translate-x-1/2 z-20">
+    <div className="absolute top-0 left-1/2 ransform -translate-x-1/2 z-20 ">
       {loading && <Preloader />}
       {formModal && (
-        <div className="w-[700px] shadow-2xl  p-20 mx-auto relative bg-white rounded-xl">
+        <div className="max-w-[700px] xs:max-w-[400px] shadow-2xl  p-20 mx-auto relative bg-white rounded-xl">
           <p className="mb-4">{typeModal}</p>
           <div className="absolute top-2 right-2">
             <AiFillCloseCircle

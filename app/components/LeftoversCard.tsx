@@ -16,7 +16,7 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
 
   const [selectedSide, setSelectedSide] = useState<string>('');
   const [selectedRow, setSelectedRow] = useState<string>('');
-  const [formModal, setFormModal] = useState<boolean>(false);
+  const [formModal, setFormModal] = useState<boolean>(true);
   const [updateForm, setUpdateForm] = useState<boolean>(false);
   const [stoneUpdate, setStoneUpdate] = useState({
     width: '',
@@ -69,7 +69,7 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
         size="xl"
         open={open}
         handler={handleOpen}
-        className="w-[80vw] h-[80vh] overflow-scroll mx-auto mt-[20px] p-5">
+        className="w-[80vw] h-[80vh]   overflow-scroll mx-auto mt-[20px] p-5">
         <DialogBody divider={true} className="p-0 ">
           {formModal || updateForm ? (
             <>

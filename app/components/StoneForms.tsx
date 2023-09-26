@@ -1,11 +1,12 @@
 'use client';
 import { useState } from 'react';
 import CustomButton from './CustomButton';
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { AiFillCloseCircle } from 'react-icons/ai';
 import { useStoneStore } from '@/data/stores/useStoneStore';
 
 import { addImage } from '@/utils/uploadImage';
 import Title from './Title';
+
 
 import CreateStoneForm from './createStoneForm';
 
@@ -116,22 +117,20 @@ const StoneForm = ({
     <div className="p-4">
       <div className="flex justify-between mb-10">
         <Title>{!updateForm ? 'Добавить новый камень' : 'Изменить параметры камня'}</Title>
-        <CustomButton
-          onClick={() => {
-            setFormModal(false);
-            setUpdateForm(false);
-          }}>
-          Закрыть
-        </CustomButton>
+    
+          <AiFillCloseCircle color='' className="hover:text-red-500 transition" onClick={() => { 
+                     setFormModal(false);
+                     setUpdateForm(false);
+          }}/>
       </div>
 
-      <div className="w-full flex flex-col items-center mt-[200px]">
+      <div className="w-full flex flex-col items-center mt-[200px] lg:mt-[30px]">
         {loading && <Preloader />}
-        <div className="w-[700px] shadow-2xl p-20">
+        <div className="w-[700px] lg:w-[500px] sm:w-[400px] sm:mx-10 xs:w-[330px] lg:text-base xs:text-xs  shadow-2xl p-20">
           <form
             action=""
             onSubmit={!updateForm ? handleSubmit : handleUpdate}
-            className="w-full h-full flex flex-col   gap-8">
+            className="w-full h-full flex flex-col xs:gap-3   gap-8">
             {!updateForm ? (
               <>
                 <CreateStoneForm stone={stone} setStone={setStone} />
