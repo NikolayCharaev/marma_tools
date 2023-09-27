@@ -32,7 +32,7 @@ export const POST = async (req : any) => {
     return new Response(existingPyramid, { status: 200 });
   } catch (err) {
     console.log(err);
-    return new Response('Ошибка сервера', { status: 500 });
+    return new Response('Ошибка сервера' + err, { status: 500 });
   }
 };
 export const GET = async () => {
