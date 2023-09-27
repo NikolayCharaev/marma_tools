@@ -1,29 +1,39 @@
 'use client';
 import { useState } from 'react';
-import CustomButton from './CustomButton';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { useStoneStore } from '@/data/stores/useStoneStore';
 
 import { addImage } from '@/utils/uploadImage';
 import Title from './Title';
 
-
 import CreateStoneForm from './createStoneForm';
 
 import UpdateStoneForm from './UpdateStoneForm';
 import Preloader from './Preloader';
+
+import { IStone } from '@/types/tools';
+
+interface IStoneForm {
+  setFormModal: (value: boolean) => void;
+  updateForm: boolean;
+  setUpdateForm: (value: boolean) => void;
+  selectedRow: string;
+  stoneUpdate: any;
+  selectedSide: string;
+  count?: number;
+  setStoneUpdate: any;
+}
 
 const StoneForm = ({
   setFormModal,
   updateForm,
   setUpdateForm,
   selectedRow,
-  setStoneUpdate,
   stoneUpdate,
   selectedSide,
-  count,
-}) => {
-  const [stone, setStone] = useState({
+}: // count,
+IStoneForm) => {
+  const [stone, setStone] = useState<IStone>({
     stoneType: '',
     stoneHeight: '',
     stoneWidth: '',
@@ -31,14 +41,14 @@ const StoneForm = ({
     thickness: '', // толщина камня
   });
 
-  const { updateStone, oneStone } = useStoneStore((stone) => stone);
-  const [updateImageUrl, setUpdateImageUrl] = useState('');
+  const { updateStone, oneStone } = useStoneStore((stone: any) => stone);
+  const [setUpdateImageUrl] = useState('');
 
-  const { fetchAllStones } = useStoneStore((state) => state);
+  const { fetchAllStones } = useStoneStore((state: any) => state);
 
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     if (stone?.imageUrl !== undefined) {
       try {
         e.preventDefault();
@@ -100,7 +110,7 @@ const StoneForm = ({
           imageUrl: imageUrl,
           selectedRow,
           selectedSide: oneStone.selectedSide,
-          index: count,
+          // index: count,
           id: oneStone._id,
         }),
       });
@@ -117,11 +127,15 @@ const StoneForm = ({
     <div className="p-4">
       <div className="flex justify-between mb-10">
         <Title>{!updateForm ? 'Добавить новый камень' : 'Изменить параметры камня'}</Title>
-    
-          <AiFillCloseCircle color='' className="hover:text-red-500 transition" onClick={() => { 
-                     setFormModal(false);
-                     setUpdateForm(false);
-          }}/>
+
+        <AiFillCloseCircle
+          color=""
+          className="hover:text-red-500 transition"
+          onClick={() => {
+            setFormModal(false);
+            setUpdateForm(false);
+          }}
+        />
       </div>
 
       <div className="w-full flex flex-col items-center mt-[200px] lg:mt-[30px]">
@@ -137,7 +151,7 @@ const StoneForm = ({
               </>
             ) : (
               <>
-                <UpdateStoneForm setStoneUpdate={setStoneUpdate} stoneUpdate={stoneUpdate} />
+                <UpdateStoneForm stoneUpdate={stoneUpdate} />
               </>
             )}
           </form>

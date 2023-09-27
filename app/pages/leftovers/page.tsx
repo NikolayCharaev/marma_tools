@@ -18,7 +18,7 @@ const Leftovers = () => {
 
   useEffect(() => {
     fetchAllStones('/api/stones');
-  }, []);
+  }, [fetchAllStones]);
 
   return (
     <>

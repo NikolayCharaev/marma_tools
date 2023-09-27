@@ -2,15 +2,9 @@ import CustomButton from './CustomButton';
 
 import { useStoneStore } from '@/data/stores/useStoneStore';
 
+const UpdateStoneForm = ({  stoneUpdate }) => {
+  const {  setUpdateStone, updateStone } = useStoneStore((state : any) => state);
 
-
-
-const UpdateStoneForm = ({ setStoneUpdate, stoneUpdate }) => {
-
-  const {oneStone,setUpdateStone, updateStone} = useStoneStore(state => state)
-
-
-  
   return (
     <>
       <div className="flex gap-6 lg:flex-col">
@@ -35,9 +29,10 @@ const UpdateStoneForm = ({ setStoneUpdate, stoneUpdate }) => {
         type="file"
         accept="image/*"
         onChange={(e) => {
-          const file = e.target.files[0];
-          if (file.type === 'image/jpeg' || file.type === 'image/png') {
-            setUpdateStone({ ...updateStone, imageUrl: e.target.files[0] });
+          const file = e.target.files?.[0];
+          if (file?.type === 'image/jpeg' || file?.type === 'image/png') {
+            // @ts-ignore
+            setUpdateStone({ ...updateStone, imageUrl: e.target.files?.[0] });
           } else {
             alert('выбрать можно только изображение');
             return;

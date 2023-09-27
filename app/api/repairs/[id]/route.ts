@@ -1,7 +1,7 @@
 import { connectDB } from '@/utils/database';
 import Repair from '@/models/repairs';
 
-export const DELETE = async (req : any, { params}) => {
+export const DELETE = async (req: any, { params }: { params: { id: string } }) => {
   await connectDB();
   console.log(params)
   try {
@@ -17,7 +17,7 @@ export const DELETE = async (req : any, { params}) => {
   }
 };
 
-export const PATCH = async (req : any, { params }) => {
+export const PATCH = async (req: any, { params }: { params: { id: string } }) => {
   await connectDB();
   const { more, date, imageUrl, applicationName, id } = await req.json();
   try {

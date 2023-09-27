@@ -1,5 +1,5 @@
 'use client';
-import { useState, FC } from 'react';
+import { FC } from 'react';
 import { Card, CardHeader, CardBody, CardFooter, Typography } from '@material-tailwind/react';
 import notImage from '@/public/leftovers/not-image.jpg';
 import Image from 'next/image';
@@ -13,13 +13,14 @@ interface IPostProps {
     imageUrl: string;
     applicationName: string;
     _id: string;
-    setTypeModal: (value: string) => void;
-    setIsEdited: (value: boolean) => void;
-    isEdited: boolean;
-    pageType: string;
   };
+  setIsEdited: (value: boolean) => void;
   formModal: boolean;
+  setTypeModal: (value: string) => void;
+  isEdited: boolean;
+  pageType: string;
   setFormModal: (value: boolean) => void;
+  handlePostId: (value: string) => void;
 }
 const ApplicationsCard: FC<IPostProps> = ({
   post,
@@ -31,7 +32,8 @@ const ApplicationsCard: FC<IPostProps> = ({
   isEdited,
   handlePostId,
 }) => {
-  const { fetchAllApplications } = useApplicationStore();
+  // @ts-ignore
+  const { fetchAllApplications } = useApplicationStore() 
   const { more, date, imageUrl, applicationName, _id } = post;
 
   const handleDelete = async (id: string) => {
@@ -64,7 +66,13 @@ const ApplicationsCard: FC<IPostProps> = ({
         {imageUrl === null ? (
           <Image src={notImage} alt="not-image" className="object-cover w-full h-full " />
         ) : (
-          <img src={imageUrl} alt="poster" className="object-cover w-full h-64 " />
+          <Image
+            src={imageUrl}
+            width={256}
+            height={296}
+            alt="poster"
+            className="object-cover w-full h-64 "
+          />
         )}
       </CardHeader>
       <CardBody className="p-2">

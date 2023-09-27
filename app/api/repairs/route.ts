@@ -14,7 +14,7 @@ export const GET = async () => {
   }
 };
 
-export const POST = async (req) => {
+export const POST = async (req : any) => {
   await connectDB();
   try {
     const { more, imageUrl, date, applicationName } = await req.json();

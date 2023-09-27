@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 type IButtonProps = {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e : any) => void;
   className?: string;
 };
 

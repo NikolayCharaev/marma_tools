@@ -9,14 +9,24 @@ import StoneForm from './StoneForms';
 
 import { AiFillFileAdd } from 'react-icons/ai';
 
-function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
+// import { IStone } from '../types/tools';
+import {IStone } from '../../types/tools'
+
+
+interface ILeftowersCard {
+  card: any;
+  imageBg: string;
+  index: number;
+}
+
+function LeftoversCard({ card, imageBg, index } : ILeftowersCard) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
   const { left, right } = card;
 
   const [selectedSide, setSelectedSide] = useState<string>('');
   const [selectedRow, setSelectedRow] = useState<string>('');
-  const [formModal, setFormModal] = useState<boolean>(true);
+  const [formModal, setFormModal] = useState<boolean>(false);
   const [updateForm, setUpdateForm] = useState<boolean>(false);
   const [stoneUpdate, setStoneUpdate] = useState({
     width: '',
@@ -24,14 +34,14 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
     imageUrl: '',
   });
 
-  const handleStonePacth = (prop) => {
-    setStoneUpdate({
-      ...stoneUpdate,
-      width: prop.width,
-      height: prop.height,
-      imageUrl: prop.imageUrl,
-    });
-  };
+  // const handleStonePacth = (prop) => {
+  //   setStoneUpdate({
+  //     ...stoneUpdate,
+  //     width: prop.width,
+  //     height: prop.height,
+  //     imageUrl: prop.imageUrl,
+  //   });
+  // };
 
   return (
     <>
@@ -98,7 +108,7 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
                     </CustomButton>
                   </div>
 
-                  {left?.map((stone, counter) => {
+                  {left?.map((stone : IStone, counter : number) => {
                     return (
                       <div key={stone._id}>
                         <StoneCard
@@ -137,7 +147,7 @@ function LeftoversCard({ card, imageBg, index, handlePostsUpdate }) {
                           setUpdateForm={setUpdateForm}
                           selectedSide={'right'}
                           selectedRow={selectedRow}
-                          handlePostsUpdate={handlePostsUpdate}
+                          // handlePostsUpdate={handlePostsUpdate}
                         />
                       </div>
                     );

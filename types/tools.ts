@@ -7,3 +7,13 @@ export type NavDataProps = {
   description?: string;
 };
 
+
+
+export type IStone = { 
+  _id? : string,
+  stoneType: string,
+  height: number,
+  width: number,
+  imageUrl: null | File,
+  thickness: string, // толщина камня
+}

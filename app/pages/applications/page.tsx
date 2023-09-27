@@ -22,7 +22,7 @@ const Applications = () => {
   useEffect(() => {
     setPageType('applications');
     fetchAllApplications('/api/applications');
-  }, []);
+  }, [setPageType,fetchAllApplications]);
 
   const handlePostId = (value) => {
     setPostId(value);

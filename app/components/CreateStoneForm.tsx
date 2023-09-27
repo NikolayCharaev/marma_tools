@@ -1,7 +1,13 @@
-import React from 'react';
+import { IStone } from '@/types/tools';
+import { FC } from 'react';
 import CustomButton from './CustomButton';
 
-const CreateStoneForm = ({ stone, setStone }) => {
+interface IStoneForm {
+  stone: IStone;
+  setStone: (value: any) => void;
+}
+
+const CreateStoneForm: FC<IStoneForm> = ({ stone, setStone }) => {
   return (
     <>
       <input
@@ -46,9 +52,10 @@ const CreateStoneForm = ({ stone, setStone }) => {
         type="file"
         accept="image/*"
         onChange={(e) => {
-          const file = e.target.files[0];
-          if (file.type === 'image/jpeg' || file.type === 'image/png') {
-            setStone({ ...stone, imageUrl: e.target.files[0] });
+          const file = e.target.files?.[0];
+          if (file?.type === 'image/jpeg' || file?.type === 'image/png') {
+            // @ts-ignore
+            setStone({ ...stone, imageUrl: e.target.files?.[0] });
           } else {
             alert('выбрать можно только изображение');
             return;

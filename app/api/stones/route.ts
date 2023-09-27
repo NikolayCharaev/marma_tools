@@ -1,7 +1,7 @@
 import { connectDB } from '@/utils/database';
 import Pyramid from '@/models/leftovers';
 
-export const POST = async (req) => {
+export const POST = async (req : any) => {
   const { stoneType, width, height, selectedRow, selectedSide, imageUrl, thickness } =
     await req.json();
   try {
@@ -38,7 +38,8 @@ export const POST = async (req) => {
 export const GET = async () => {
   await connectDB();
   try {
-    const exists = await Pyramid.exists();
+    // @ts-ignore
+    const exists = await Pyramid.exists(); 
     if (!exists) {
       const newPyramid = new Pyramid({
         rowOne: { right: [] },

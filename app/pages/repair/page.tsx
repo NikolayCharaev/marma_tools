@@ -26,10 +26,9 @@ const Repair = () => {
   useEffect(() => {
     setPageType('repairs');
     fetchAllApplications('/api/repairs');
-  }, []);
+  }, [setPageType,fetchAllApplications]);
 
-  console.log(pageType);
-  const handlePostId = (value) => {
+  const handlePostId = (value : string) => {
     setPostId(value);
   };
 

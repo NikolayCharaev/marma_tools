@@ -1,5 +1,5 @@
 'use client';
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, FormEvent } from 'react';
 
 import { AiOutlineLoading3Quarters, AiFillCloseCircle } from 'react-icons/ai';
 import { addImage } from '@/utils/uploadImage';
@@ -18,7 +18,7 @@ interface IApplicationsFormProps {
   setIsEdited: (value: boolean) => void;
   isEdited: boolean;
   postId: string;
-  pageType: string
+  pageType: string;
 }
 
 const ApplicationsForm: FC<IApplicationsFormProps> = ({
@@ -33,8 +33,8 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
   setLoading,
   type,
 }) => {
-  const { fetchAllApplications, allApplications, fetchPostApplication, fetchPatchApplication } =
-    useApplicationStore((state) => state);
+  // @ts-ignore
+  const { fetchPostApplication, fetchPatchApplication } = useApplicationStore((state) => state);
   const [postModel, setPostModel] = useState({
     imageUrl: null as File | null,
     date: getCurrentDateTime(),
@@ -42,7 +42,7 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
     more: '',
   });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
     const setNewImage = await addImage(postModel?.imageUrl);
@@ -73,7 +73,7 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
     }
   };
 
-  const handleUpdate = async (e) => {
+  const handleUpdate = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
     const setNewImage = await addImage(postModel?.imageUrl);
@@ -144,9 +144,10 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
               type="file"
               accept="image/*"
               onChange={(e) => {
-                const file = e.target.files[0];
-                if (file.type === 'image/jpeg' || file.type === 'image/png') {
-                  setPostModel({ ...postModel, imageUrl: e.target.files[0] });
+                const file = e.target.files?.[0];
+                if (file?.type === 'image/jpeg' || file?.type === 'image/png') {
+               // @ts-ignore
+                  setPostModel({ ...postModel, imageUrl: e.target.files?.[0] });
                 } else {
                   alert('выбрать можно только изображение');
                   return;

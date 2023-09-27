@@ -9,12 +9,12 @@ import {
   CardFooter,
   DialogBody,
 } from '@material-tailwind/react';
-import {AiFillDelete, AiFillEdit} from 'react-icons/ai'
+import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 
 import { useStoneStore } from '@/data/stores/useStoneStore';
 
 import notImage from '@/public/leftovers/not-image.jpg';
-
+import { IStone } from '@/types/tools';
 import Image from 'next/image';
 import CustomButton from './CustomButton';
 
@@ -22,17 +22,22 @@ type IStoneProps = {
   stoneType: string;
   width: number;
   height: number;
+  count: number;
+  stone: IStone;
+  selectedSide: string;
+  selectedRow: string;
+  setUpdateForm: (value: boolean) => void;
 };
 
 function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: IStoneProps) {
   const { imageUrl, width, height, stoneType, thickness, _id } = stone;
 
-  const { oneStone, setOneStone, fetchAllStones } = useStoneStore((state) => state);
+  const { setOneStone, fetchAllStones } = useStoneStore((state : any) => state);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id : string) => {
     const responce = await fetch('/api/stones/' + id, {
       method: 'DELETE',
       body: JSON.stringify({
@@ -55,17 +60,26 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
           color="transparent"
           className="m-0 rounded-none h-[25rem] sm:h-72 mt:h-32 object-cover"
           onClick={handleOpen}>
-          {imageUrl === undefined ? (
+          {imageUrl === null ? (
             <Image src={notImage} alt="not-image" className="object-cover w-full h-full " />
           ) : (
-            <img src={imageUrl} alt="poster" className="object-cover w-full h-full  " />
+            <Image
+              src={imageUrl}
+              width={300}
+              height={300}
+              alt="poster"
+              className="object-cover w-full h-full  "
+            />
           )}
         </CardHeader>
         <CardBody>
-          <Typography variant="h4" color="blue-gray" className='sm:text-lg'>
+          <Typography variant="h4" color="blue-gray" className="sm:text-lg">
             {stoneType}
           </Typography>
-          <Typography variant="lead" color="gray" className="mt-3 font-normal sm:text-sm mt:text-xs">
+          <Typography
+            variant="lead"
+            color="gray"
+            className="mt-3 font-normal sm:text-sm mt:text-xs">
             <p>Длинна камня: {width} мм</p>
             <p>Высота камня: {height} мм</p>
             <p>Толщина камня: {thickness} мм</p>
@@ -78,7 +92,7 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
                 handleDelete(_id);
               }
             }}>
-            <AiFillDelete/>
+            <AiFillDelete />
           </CustomButton>
           <CustomButton
             onClick={(e) => {
@@ -95,7 +109,7 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
                 _id,
               });
             }}>
-            <AiFillEdit/>
+            <AiFillEdit />
           </CustomButton>
         </CardFooter>
       </Card>
@@ -105,9 +119,12 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
         handler={handleOpen}
         className="flex items-center justify-center w-[70vw] h-[80vh] mx-auto mt-[70px] overflow-hidden object-center ">
         <DialogBody divider={true} className="">
-          <img
+          <Image
             src={imageUrl}
-            className="aspect-square p-2 w-full h-full  object-contain w-full h-full"
+            width={3500}
+            height={3500}
+            alt="poster"
+            className="aspect-square p-2 object-contain w-full h-full"
           />
         </DialogBody>
       </Dialog>
