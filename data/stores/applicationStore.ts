@@ -1,22 +1,21 @@
+import { IApplication } from '@/types/tools';
 import { getCurrentDateTime } from '@/utils/day';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-
-
 export const useApplicationStore = create(
-  devtools((set, get) => ({
+  devtools((set : any, get : any) => ({
     allApplications: [],
-    pageType : '',
-    setPageType : (page : string) => { 
-      set({pageType : page})
+    pageType: '',
+    setPageType: (page: string) => {
+      set({ pageType: page });
     },
     fetchAllApplications: async (pond: string) => {
       const response = await fetch(pond);
       const applications = await response.json();
       set({ allApplications: applications });
     },
-    fetchPostApplication: async (pond: string, post) => {
+    fetchPostApplication: async (pond: string, post: IApplication) => {
       await fetch(pond, {
         method: 'POST',
         body: JSON.stringify({
@@ -26,11 +25,12 @@ export const useApplicationStore = create(
           date: post.date,
         }),
       });
-      // const currentPageType = get().pageType;
       // Вызываем fetchAllApplications после добавления нового поста
+
+      // @ts-ignore
       get().fetchAllApplications(`/api/${get().pageType}/`);
     },
-    fetchPatchApplication: async (pond: string, post, postId) => {
+    fetchPatchApplication: async (pond: string, post: IApplication, postId: string) => {
       await fetch(pond, {
         method: 'PATCH',
         body: JSON.stringify({
@@ -42,6 +42,7 @@ export const useApplicationStore = create(
         }),
       });
       // Вызываем fetchAllApplications после изменения поста
+      // @ts-ignore
       get().fetchAllApplications(`/api/${get().pageType}/`);
     },
   })),

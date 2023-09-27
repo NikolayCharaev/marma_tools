@@ -10,6 +10,7 @@ import ApplicationsForm from '@/app/components/ApplicationsForm';
 import ApplicationsCard from '@/app/components/ApplicationsCard';
 
 import { useApplicationStore } from '@/data/stores/applicationStore';
+import { IApplication } from '@/types/tools';
 
 const Repair = () => {
   const { setPageType, pageType, allApplications, fetchAllApplications } = useApplicationStore(
@@ -19,7 +20,6 @@ const Repair = () => {
   const [loading, setLoading] = useState<boolean>(false); // прелоадер загрузки
   const [typeModal, setTypeModal] = useState<string>('');
   const [isEdited, setIsEdited] = useState(false);
-  // const [pageType, setPageType] = useState<string>('');
   const [postId, setPostId] = useState('');
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const Repair = () => {
               Тут пока ничего нет
             </Typography>
           ) : (
-            allApplications.map((post) => {
+            allApplications.map((post : IApplication) => {
               return (
                 <ApplicationsCard
                   pageType={pageType}

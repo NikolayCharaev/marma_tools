@@ -8,6 +8,8 @@ import { useApplicationStore } from '@/data/stores/applicationStore';
 import Preloader from './Preloader';
 import CustomButton from './CustomButton';
 
+import {IApplication} from '@/types/tools'
+
 interface IApplicationsFormProps {
   formModal: boolean;
   setFormModal: (value: boolean) => void;
@@ -57,6 +59,7 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
       }
     }
     try {
+        // @ts-ignore
       fetchPostApplication(`/api/${pageType}`, postModel);
       // Обновление состояния postModel
       setPostModel({
@@ -89,6 +92,7 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
     }
 
     try {
+        // @ts-ignore
       fetchPatchApplication(`/api/${pageType}/${postId}`, postModel, postId);
       setPostModel({
         imageUrl: null,

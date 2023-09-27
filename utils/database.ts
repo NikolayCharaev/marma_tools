@@ -11,8 +11,9 @@ export const connectDB = async () => {
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
+    await mongoose.connect(process.env.MONGODB_URI || 'default-mongodb-uri', {
       dbName: 'marma_tools',
+      // @ts-ignore
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

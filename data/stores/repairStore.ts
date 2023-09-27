@@ -1,16 +1,17 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { getCurrentDateTime } from '@/utils/day';
+import { IApplication } from '@/types/tools';
 
 export const useRepairStore = create(
-  devtools((set, get) => ({
+  devtools((set: any, get: any) => ({
     allRepairs: [],
     fetchAllRepairs: async (pond: string) => {
       const response = await fetch(pond);
       const repairs = await response.json();
       set({ allRepairs: repairs });
     },
-    fetchPostRepair: async (pond: string, post) => {
+    fetchPostRepair: async (pond: string, post: IApplication) => {
       await fetch(pond, {
         method: 'POST',
         body: JSON.stringify({
@@ -21,9 +22,11 @@ export const useRepairStore = create(
         }),
       });
       // Вызываем fetchAllRepairs после добавления нового поста
+
+      // @ts-ignore
       get().fetchAllRepairs('/api/repairs/');
     },
-    fetchPatchRepair: async (pond: string, post, postId) => {
+    fetchPatchRepair: async (pond: string, post: IApplication, postId: string) => {
       await fetch(pond, {
         method: 'PATCH',
         body: JSON.stringify({
@@ -35,6 +38,7 @@ export const useRepairStore = create(
         }),
       });
       // Вызываем fetchAllRepairs после изменения поста
+      // @ts-ignore
       get().fetchAllRepairs('/api/repairs/');
     },
   })),
