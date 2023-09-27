@@ -25,16 +25,16 @@ const CreateStoneForm: FC<IStoneForm> = ({ stone, setStone }) => {
           className="p-2 border rounded-xl"
           type="number"
           placeholder="длинна камня"
-          value={stone?.stoneWidth}
-          onChange={(e) => setStone({ ...stone, stoneWidth: e.target.value })}
+          value={stone?.width}
+          onChange={(e) => setStone({ ...stone, width: e.target.value })}
         />
         <input
           required
           className="p-2 border rounded-xl"
           type="number"
           placeholder="ширина камня"
-          value={stone?.stoneHeight}
-          onChange={(e) => setStone({ ...stone, stoneHeight: e.target.value })}
+          value={stone?.height}
+          onChange={(e) => setStone({ ...stone, height: e.target.value })}
         />
       </div>
 

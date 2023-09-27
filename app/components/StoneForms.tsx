@@ -68,8 +68,8 @@ IStoneForm) => {
         method: 'POST',
         body: JSON.stringify({
           stoneType: stone.stoneType,
-          width: stone.stoneWidth,
-          height: stone.stoneHeight,
+          width: stone.width,
+          height: stone.height,
           thickness: stone.thickness,
           imageUrl: stone.imageUrl,
           selectedRow,
