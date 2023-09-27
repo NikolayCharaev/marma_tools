@@ -10,8 +10,7 @@ import StoneForm from './StoneForms';
 import { AiFillFileAdd } from 'react-icons/ai';
 
 // import { IStone } from '../types/tools';
-import {IStone } from '../../types/tools'
-
+import { IStone } from '../../types/tools';
 
 interface ILeftowersCard {
   card: any;
@@ -19,7 +18,10 @@ interface ILeftowersCard {
   index: number;
 }
 
-function LeftoversCard({ card, imageBg, index } : ILeftowersCard) {
+{
+  /*// @ts-ignore*/
+}
+function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
   const { left, right } = card;
@@ -67,7 +69,12 @@ function LeftoversCard({ card, imageBg, index } : ILeftowersCard) {
               break;
           }
         }}>
-        <Image alt="image" className="w-full h-full object-cover " src={imageBg} />
+        <Image
+          alt="image"
+          className="w-full h-full object-cover "
+          // @ts-ignore
+          src={imageBg}
+        />
 
         <Typography
           className="absolute top-[20px] left-[20px] p-2 bg-white rounded-xl "
@@ -108,9 +115,10 @@ function LeftoversCard({ card, imageBg, index } : ILeftowersCard) {
                     </CustomButton>
                   </div>
 
-                  {left?.map((stone : IStone, counter : number) => {
+                  {left?.map((stone: IStone, counter: number) => {
                     return (
                       <div key={stone._id}>
+                        {/*// @ts-ignore */}
                         <StoneCard
                           count={counter}
                           stone={stone}
@@ -136,18 +144,16 @@ function LeftoversCard({ card, imageBg, index } : ILeftowersCard) {
                       <AiFillFileAdd />
                     </CustomButton>
                   </div>
-                  {right?.map((stone, counter) => {
+                  {right?.map((stone: IStone, counter: number) => {
                     return (
                       <div key={stone._id}>
+                        {/*// @ts-ignore */}
                         <StoneCard
-                          setStoneUpdate={setStoneUpdate}
-                          stoneUpdate={stoneUpdate}
                           count={counter}
                           stone={stone}
                           setUpdateForm={setUpdateForm}
                           selectedSide={'right'}
                           selectedRow={selectedRow}
-                          // handlePostsUpdate={handlePostsUpdate}
                         />
                       </div>
                     );

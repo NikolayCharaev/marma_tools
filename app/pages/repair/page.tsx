@@ -12,9 +12,8 @@ import ApplicationsCard from '@/app/components/ApplicationsCard';
 import { useApplicationStore } from '@/data/stores/applicationStore';
 
 const Repair = () => {
-  const { fetchAllRepairs, allRepairs } = useRepairStore((state) => state);
   const { setPageType, pageType, allApplications, fetchAllApplications } = useApplicationStore(
-    (state) => state,
+    (state: any) => state,
   );
   const [formModal, setFormModal] = useState<boolean>(false); //открытие и закрытие формы
   const [loading, setLoading] = useState<boolean>(false); // прелоадер загрузки
@@ -26,9 +25,9 @@ const Repair = () => {
   useEffect(() => {
     setPageType('repairs');
     fetchAllApplications('/api/repairs');
-  }, [setPageType,fetchAllApplications]);
+  }, [setPageType, fetchAllApplications]);
 
-  const handlePostId = (value : string) => {
+  const handlePostId = (value: string) => {
     setPostId(value);
   };
 

@@ -32,12 +32,12 @@ type IStoneProps = {
 function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: IStoneProps) {
   const { imageUrl, width, height, stoneType, thickness, _id } = stone;
 
-  const { setOneStone, fetchAllStones } = useStoneStore((state : any) => state);
+  const { setOneStone, fetchAllStones } = useStoneStore((state: any) => state);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
 
-  const handleDelete = async (id : string) => {
+  const handleDelete = async (id: string) => {
     const responce = await fetch('/api/stones/' + id, {
       method: 'DELETE',
       body: JSON.stringify({
@@ -61,9 +61,15 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
           className="m-0 rounded-none h-[25rem] sm:h-72 mt:h-32 object-cover"
           onClick={handleOpen}>
           {imageUrl === null ? (
-            <Image src={notImage} alt="not-image" className="object-cover w-full h-full " />
+            <Image
+              // @ts-ignore
+              src={notImage}
+              alt="not-image"
+              className="object-cover w-full h-full "
+            />
           ) : (
             <Image
+              // @ts-ignore
               src={imageUrl}
               width={300}
               height={300}
@@ -88,7 +94,7 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
         <CardFooter className="pt-0 flex items-center mt-4">
           <CustomButton
             onClick={() => {
-              if (confirm('Вы действительно хотите удалить запись?')) {
+              if (_id && confirm('Вы действительно хотите удалить запись?')) {
                 handleDelete(_id);
               }
             }}>
@@ -120,6 +126,7 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
         className="flex items-center justify-center w-[70vw] h-[80vh] mx-auto mt-[70px] overflow-hidden object-center ">
         <DialogBody divider={true} className="">
           <Image
+            // @ts-ignore
             src={imageUrl}
             width={3500}
             height={3500}

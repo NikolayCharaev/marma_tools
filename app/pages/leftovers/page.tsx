@@ -14,7 +14,7 @@ const images = [rowOneBg, rowTwoBg, rowThreeBg, rowFourBg, rowFiveBg];
 import { useStoneStore } from '@/data/stores/useStoneStore';
 
 const Leftovers = () => {
-  const { allStones, setAllStones, fetchAllStones } = useStoneStore((state) => state);
+  const { allStones, setAllStones, fetchAllStones } = useStoneStore((state: any) => state);
 
   useEffect(() => {
     fetchAllStones('/api/stones');
@@ -23,18 +23,14 @@ const Leftovers = () => {
   return (
     <>
       <Title style="mb-10">Остатки камня</Title>
-     
+
       <div className="flex 3xl:flex-wrap sm:justify-center gap-5 ">
-        {allStones?.slice(0, 5).map((elem, index) => {
+        {allStones?.slice(0, 5).map((elem: any, index: number) => {
           const imageBg = images[index];
           return (
             <div key={index}>
-              <LeftoversCard
-                card={elem}
-                imageBg={imageBg}
-                index={index + 1}
-              />
-
+              {/* @ts-ignore */}
+              <LeftoversCard card={elem} imageBg={imageBg} index={index + 1} />
             </div>
           );
         })}

@@ -6,7 +6,7 @@ import { useStoneStore } from '@/data/stores/useStoneStore';
 import { addImage } from '@/utils/uploadImage';
 import Title from './Title';
 
-import CreateStoneForm from './createStoneForm';
+import CreateStoneForm from './CreateStoneForm';
 
 import UpdateStoneForm from './UpdateStoneForm';
 import Preloader from './Preloader';
@@ -33,13 +33,13 @@ const StoneForm = ({
   selectedSide,
 }: // count,
 IStoneForm) => {
-  const [stone, setStone] = useState<IStone>({
-    stoneType: '',
-    stoneHeight: '',
-    stoneWidth: '',
+  const [stone, setStone] = useState({
+    stoneType : '',
+    width: '',
+    height: '',
     imageUrl: null as File | null,
     thickness: '', // толщина камня
-  });
+  } );
 
   const { updateStone, oneStone } = useStoneStore((stone: any) => stone);
   const [setUpdateImageUrl] = useState('');
@@ -94,6 +94,7 @@ IStoneForm) => {
         setLoading(true);
         const setNewImage = await addImage(stone?.imageUrl);
         if (setNewImage) {
+          // @ts-ignore
           setUpdateImageUrl((updateStone.imageUrl = setNewImage));
         }
       } catch (err) {

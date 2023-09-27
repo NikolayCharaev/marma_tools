@@ -2,7 +2,7 @@ import CustomButton from './CustomButton';
 
 import { useStoneStore } from '@/data/stores/useStoneStore';
 
-const UpdateStoneForm = ({  stoneUpdate }) => {
+const UpdateStoneForm = ({  stoneUpdate } : any) => {
   const {  setUpdateStone, updateStone } = useStoneStore((state : any) => state);
 
   return (
