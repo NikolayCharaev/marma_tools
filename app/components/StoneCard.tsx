@@ -100,7 +100,7 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
             }}>
             <AiFillDelete />
           </CustomButton>
-          <CustomButton
+          {/* <CustomButton
             onClick={(e) => {
               e.preventDefault();
               setUpdateForm(true);
@@ -116,7 +116,7 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
               });
             }}>
             <AiFillEdit />
-          </CustomButton>
+          </CustomButton> */}
         </CardFooter>
       </Card>
       <Dialog
