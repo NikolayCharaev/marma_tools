@@ -22,24 +22,7 @@ const stoneSchema = new Schema({
 });
 
 const pyramidSchema = new Schema({
-  rowOne: {
-    right: [stoneSchema],
-  },
-  rowTwo: {
-    left: [stoneSchema],
-    right: [stoneSchema],
-  },
-  rowThree: {
-    left: [stoneSchema],
-    right: [stoneSchema],
-  },
-  rowFour: {
-    left: [stoneSchema],
-    right: [stoneSchema],
-  },
-  rowFive: {
-    left: [stoneSchema],
-  },
+  rows: [[stoneSchema]], // Вложенный массив для представления рядов
 });
 
 const Pyramid = models.Pyramid || model('Pyramid', pyramidSchema);

@@ -8,7 +8,7 @@ export const DELETE = async (req : any) => {
 
     const pyramid = await Pyramid.findOne({});
 
-    const stone = pyramid[selectedRow][selectedSide];
+    const stone = pyramid.rows[selectedRow];
 
     // Удаление выбранного элемента
     stone.splice(index, 1);

@@ -25,12 +25,12 @@ const Leftovers = () => {
       <Title style="mb-10">Остатки камня</Title>
 
       <div className="flex 3xl:flex-wrap sm:justify-center gap-5 ">
-        {allStones?.slice(0, 5).map((elem: any, index: number) => {
+        {allStones?.map((elem: any, index: number) => {
           const imageBg = images[index];
           return (
             <div key={index}>
               {/* @ts-ignore */}
-              <LeftoversCard card={elem} imageBg={imageBg} index={index + 1} />
+              <LeftoversCard card={allStones[index]} imageBg={imageBg} index={index + 1} />
             </div>
           );
         })}

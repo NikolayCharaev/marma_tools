@@ -1,6 +1,6 @@
 'use client';
-import { useState } from 'react';
-import { Dialog, DialogBody, Card, Typography } from '@material-tailwind/react';
+import { useEffect, useState } from 'react';
+import { Dialog, DialogBody, Card, Typography, Tooltip } from '@material-tailwind/react';
 import Image from 'next/image';
 import StoneCard from './StoneCard';
 import Title from './Title';
@@ -11,6 +11,7 @@ import { AiFillFileAdd } from 'react-icons/ai';
 
 // import { IStone } from '../types/tools';
 import { IStone } from '../../types/tools';
+import { useStoneStore } from '@/data/stores/useStoneStore';
 
 interface ILeftowersCard {
   card: any;
@@ -24,10 +25,11 @@ interface ILeftowersCard {
 function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
-  const { left, right } = card;
+  // const { left, right } = card;
 
+  const { allStones } = useStoneStore((state) => state);
   const [selectedSide, setSelectedSide] = useState<string>('');
-  const [selectedRow, setSelectedRow] = useState<string>('');
+  const [selectedRow, setSelectedRow] = useState<number>(0);
   const [formModal, setFormModal] = useState<boolean>(false);
   const [updateForm, setUpdateForm] = useState<boolean>(false);
   const [stoneUpdate, setStoneUpdate] = useState({
@@ -45,6 +47,11 @@ function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
   //   });
   // };
 
+  console.log(card, 'CARD');
+
+
+
+
   return (
     <>
       <Card
@@ -53,19 +60,19 @@ function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
           handleOpen();
           switch (index) {
             case 1:
-              setSelectedRow('rowOne');
+              setSelectedRow(0);
               break;
             case 2:
-              setSelectedRow('rowTwo');
+              setSelectedRow(1);
               break;
             case 3:
-              setSelectedRow('rowThree');
+              setSelectedRow(2);
               break;
             case 4:
-              setSelectedRow('rowFour');
+              setSelectedRow(3);
               break;
             case 5:
-              setSelectedRow('rowFive');
+              setSelectedRow(4);
               break;
           }
         }}>
@@ -88,6 +95,17 @@ function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
         handler={handleOpen}
         className="w-[80vw] h-[80vh]   overflow-scroll mx-auto mt-[20px] p-5">
         <DialogBody divider={true} className="p-0 ">
+          <div className="flex justify-end ">
+            {!formModal && (
+              <div className="relative mb-5">
+                <AiFillFileAdd
+                  size={40}
+                  className="hover:text-red-500 cursor-pointer transition"
+                  onClick={() => setFormModal(true)}
+                />
+              </div>
+            )}
+          </div>
           {formModal || updateForm ? (
             <>
               <StoneForm
@@ -101,65 +119,22 @@ function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
               />
             </>
           ) : (
-            <div className="flex justify-between">
-              {card.left && (
-                <div className="">
-                  <div className="flex justify-between mt:justify-start mt:gap-2 mt:items-center mb-3 gap-5">
-                    <Title style="text-left ">левая сторона</Title>
-                    <CustomButton
-                      onClick={() => {
-                        setSelectedSide('left');
-                        setFormModal(true);
-                      }}>
-                      <AiFillFileAdd />
-                    </CustomButton>
-                  </div>
-
-                  {left?.map((stone: IStone, counter: number) => {
-                    return (
-                      <div key={stone._id}>
-                        {/*// @ts-ignore */}
-                        <StoneCard
-                          count={counter}
-                          stone={stone}
-                          setUpdateForm={setUpdateForm}
-                          selectedSide={'left'}
-                          selectedRow={selectedRow}
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-              <p className="mt:hidden">Ряд {index}</p>
-              {card.right && (
-                <div className="">
-                  <div className="flex justify-between mt:justify-start mt:gap-2 mt:items-center mb-3 gap-5">
-                    <Title style="text-left ">правая сторона</Title>
-                    <CustomButton
-                      onClick={() => {
-                        setSelectedSide('right');
-                        setFormModal(true);
-                      }}>
-                      <AiFillFileAdd />
-                    </CustomButton>
-                  </div>
-                  {right?.map((stone: IStone, counter: number) => {
-                    return (
-                      <div key={stone._id}>
-                        {/*// @ts-ignore */}
-                        <StoneCard
-                          count={counter}
-                          stone={stone}
-                          setUpdateForm={setUpdateForm}
-                          selectedSide={'right'}
-                          selectedRow={selectedRow}
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
+            <div className="flex flex-wrap gap-5">
+              {card?.map((elem) => {
+                return (
+                  <>
+                    <StoneCard
+                      index={index}
+                      item={elem}
+                      // count={counter}
+                      // stone={stone}
+                      setUpdateForm={setUpdateForm}
+                      // selectedSide={'left'}
+                      selectedRow={selectedRow}
+                    />
+                  </>
+                );
+              })}
             </div>
           )}
         </DialogBody>

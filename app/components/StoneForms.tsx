@@ -130,6 +130,7 @@ IStoneForm) => {
         <Title>{!updateForm ? 'Добавить новый камень' : 'Изменить параметры камня'}</Title>
 
         <AiFillCloseCircle
+        size={40}
           color=""
           className="hover:text-red-500 transition"
           onClick={() => {

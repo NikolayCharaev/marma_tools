@@ -8,8 +8,8 @@ export const useStoneStore = create(
     fetchAllStones: async (pond: string) => {
       const response = await fetch(pond);
       const stones = await response.json();
-      const values = Object.values(stones[0]);
-      set({ allStones: values });
+      // const values = Object.values(stones[0]);
+      set({ allStones: stones[0].rows });
     },
     oneStone: {},
     updateStone: {},

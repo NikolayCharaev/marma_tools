@@ -27,10 +27,12 @@ type IStoneProps = {
   selectedSide: string;
   selectedRow: string;
   setUpdateForm: (value: boolean) => void;
+  item : any
 };
 
-function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: IStoneProps) {
-  const { imageUrl, width, height, stoneType, thickness, _id } = stone;
+function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count,item }: IStoneProps) {
+
+  const { imageUrl, width, height, stoneType, thickness, _id } = item;
 
   const { setOneStone, fetchAllStones } = useStoneStore((state: any) => state);
 
@@ -51,9 +53,11 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
     }
   };
 
+
+
   return (
     <>
-      <Card className="max-w-[24rem] md:max-w-[18rem]  overflow-hidden cursor-pointer hover:opacity-90 transition mb-10 mt:w-32">
+      <Card className="max-w-[23%] max-w-[24rem] md:max-w-[18rem]  overflow-hidden cursor-pointer hover:opacity-90 transition mb-10 mt:w-32">
         <CardHeader
           floated={false}
           shadow={false}
@@ -68,7 +72,7 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
               className="object-cover w-full h-full "
             />
           ) : (
-            <Image
+            <img
               // @ts-ignore
               src={imageUrl}
               width={300}
@@ -80,7 +84,7 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
         </CardHeader>
         <CardBody>
           <Typography variant="h4" color="blue-gray" className="sm:text-lg">
-            {stoneType}
+            {item.stoneType}
           </Typography>
           <Typography
             variant="lead"
@@ -125,11 +129,11 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
         handler={handleOpen}
         className="flex items-center justify-center w-[70vw] h-[80vh] mx-auto mt-[70px] overflow-hidden object-center ">
         <DialogBody divider={true} className="">
-          <Image
+          <img
             // @ts-ignore
             src={imageUrl}
-            width={3500}
-            height={3500}
+            // width={3500}
+            // height={3500}
             alt="poster"
             className="aspect-square p-2 object-contain w-full h-full"
           />
@@ -137,6 +141,10 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count }: I
       </Dialog>
     </>
   );
+
+
+
+
 }
 
 export default StoneCard;
