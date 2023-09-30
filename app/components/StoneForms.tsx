@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { useStoneStore } from '@/data/stores/useStoneStore';
-
+import { toast } from 'react-toastify';
 import { addImage } from '@/utils/uploadImage';
 import Title from './Title';
 
@@ -34,12 +34,12 @@ const StoneForm = ({
 }: // count,
 IStoneForm) => {
   const [stone, setStone] = useState({
-    stoneType : '',
+    stoneType: '',
     width: '',
     height: '',
     imageUrl: null as File | null,
     thickness: '', // толщина камня
-  } );
+  });
 
   const { updateStone, oneStone } = useStoneStore((stone: any) => stone);
   const [setUpdateImageUrl] = useState('');
@@ -49,34 +49,50 @@ IStoneForm) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: any) => {
+    // setLoading(true);
+    // toast.info('Идет загрузка камня...', { autoClose: loading });
     if (stone?.imageUrl !== undefined) {
       try {
         e.preventDefault();
-        setLoading(true);
+
+        // setLoading(true);
 
         const setNewImage = await addImage(stone?.imageUrl);
         if (setNewImage) {
           setStone((stone.imageUrl = setNewImage));
         }
       } catch (err) {
+        toast.error('ошибка');
         console.error('Error uploading image:', err);
       }
     }
 
     try {
-      await fetch('/api/stones', {
-        method: 'POST',
-        body: JSON.stringify({
-          stoneType: stone.stoneType,
-          width: stone.width,
-          height: stone.height,
-          thickness: stone.thickness,
-          imageUrl: stone.imageUrl,
-          selectedRow,
-          selectedSide,
+      const response = await toast.promise(
+        fetch('/api/stones', {
+          method: 'POST',
+          body: JSON.stringify({
+            stoneType: stone.stoneType,
+            width: stone.width,
+            height: stone.height,
+            thickness: stone.thickness,
+            imageUrl: stone.imageUrl,
+            selectedRow,
+            selectedSide,
+          }),
         }),
-      });
+        {
+          pending: 'Promise is pending',
+          success: 'Promise resolved 👌',
+          error: 'Promise rejected 🤯',
+        }
+      );
+      // if (responce.status === 200) {
+      //   // toast.success('Загрузка завершена!', { autoClose: true });
+      //   setLoading(false);
+      // }
     } catch (err) {
+      toast.error('Ошибка при загрузке...', { autoClose: true });
       console.log('Произошла ошибка при загрузке поста', err);
     } finally {
       setLoading(false);
@@ -130,7 +146,7 @@ IStoneForm) => {
         <Title>{!updateForm ? 'Добавить новый камень' : 'Изменить параметры камня'}</Title>
 
         <AiFillCloseCircle
-        size={40}
+          size={40}
           color=""
           className="hover:text-red-500 transition"
           onClick={() => {
@@ -141,7 +157,7 @@ IStoneForm) => {
       </div>
 
       <div className="w-full flex flex-col items-center mt-[200px] lg:mt-[30px]">
-        {loading && <Preloader />}
+        {/* {loading && <Preloader />} */}
         <div className="w-[700px] lg:w-[500px] sm:w-[400px] sm:mx-10 xs:w-[330px] lg:text-base xs:text-xs  shadow-2xl p-20">
           <form
             action=""

@@ -47,7 +47,6 @@ function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
   //   });
   // };
 
-  console.log(card, 'CARD');
 
 
 
@@ -119,8 +118,8 @@ function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
               />
             </>
           ) : (
-            <div className="flex flex-wrap gap-5">
-              {card?.map((elem) => {
+            <div className="flex flex-wrap  gap-5">
+              {card?.map((elem, index) => {
                 return (
                   <>
                     <StoneCard

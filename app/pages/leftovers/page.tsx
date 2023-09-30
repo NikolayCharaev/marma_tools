@@ -10,7 +10,7 @@ import rowFiveBg from '@/public/leftovers/row-5.jpg';
 import LeftoversCard from '@/app/components/LeftoversCard';
 
 const images = [rowOneBg, rowTwoBg, rowThreeBg, rowFourBg, rowFiveBg];
-
+import { toast } from 'react-toastify';
 import { useStoneStore } from '@/data/stores/useStoneStore';
 
 const Leftovers = () => {
@@ -19,10 +19,10 @@ const Leftovers = () => {
   useEffect(() => {
     fetchAllStones('/api/stones');
   }, [fetchAllStones]);
-
   return (
     <>
       <Title style="mb-10">Остатки камня</Title>
+        
 
       <div className="flex 3xl:flex-wrap sm:justify-center gap-5 ">
         {allStones?.map((elem: any, index: number) => {

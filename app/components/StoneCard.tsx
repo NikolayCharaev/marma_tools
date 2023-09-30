@@ -10,7 +10,7 @@ import {
   DialogBody,
 } from '@material-tailwind/react';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
-
+import { toast } from 'react-toastify';
 import { useStoneStore } from '@/data/stores/useStoneStore';
 
 import notImage from '@/public/leftovers/not-image.jpg';
@@ -28,9 +28,10 @@ type IStoneProps = {
   selectedRow: string;
   setUpdateForm: (value: boolean) => void;
   item : any
+  index: number
 };
 
-function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count,item }: IStoneProps) {
+function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count,item ,index}: IStoneProps) {
 
   const { imageUrl, width, height, stoneType, thickness, _id } = item;
 
@@ -40,15 +41,17 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count,item
   const handleOpen = () => setOpen((cur) => !cur);
 
   const handleDelete = async (id: string) => {
+    toast.info('удаление записи...', { autoClose: true }); // Показываем индикатор загрузки
     const responce = await fetch('/api/stones/' + id, {
       method: 'DELETE',
       body: JSON.stringify({
         selectedSide: selectedSide,
         selectedRow: selectedRow,
-        index: count,
+        index: index,
       }),
     });
     if (responce.status === 200) {
+      toast.success('Запись успешно удалена', {autoClose: true})
       fetchAllStones('/api/stones');
     }
   };
@@ -56,8 +59,10 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count,item
 
 
   return (
-    <>
-      <Card className="max-w-[23%] max-w-[24rem] md:max-w-[18rem]  overflow-hidden cursor-pointer hover:opacity-90 transition mb-10 mt:w-32">
+    <div className='grow  basis-64  rounded-xl'>
+      <Card className="shadow-xl  overflow-hidden cursor-pointer hover:opacity-90 transition mb-10 " onClick={() => { 
+        console.log(index)
+      }}>
         <CardHeader
           floated={false}
           shadow={false}
@@ -82,7 +87,7 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count,item
             />
           )}
         </CardHeader>
-        <CardBody>
+        <CardBody className='px-4'>
           <Typography variant="h4" color="blue-gray" className="sm:text-lg">
             {item.stoneType}
           </Typography>
@@ -95,7 +100,7 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count,item
             <p>Толщина камня: {thickness} мм</p>
           </Typography>
         </CardBody>
-        <CardFooter className="pt-0 flex items-center mt-4">
+        <CardFooter className="pt-0 px-4 flex items-center mt-4">
           <CustomButton
             onClick={() => {
               if (_id && confirm('Вы действительно хотите удалить запись?')) {
@@ -129,17 +134,17 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count,item
         handler={handleOpen}
         className="flex items-center justify-center w-[70vw] h-[80vh] mx-auto mt-[70px] overflow-hidden object-center ">
         <DialogBody divider={true} className="">
-          <img
+          <Image
             // @ts-ignore
             src={imageUrl}
-            // width={3500}
-            // height={3500}
+            width={1200}
+            height={1200}
             alt="poster"
             className="aspect-square p-2 object-contain w-full h-full"
           />
         </DialogBody>
       </Dialog>
-    </>
+    </div>
   );
 
 
