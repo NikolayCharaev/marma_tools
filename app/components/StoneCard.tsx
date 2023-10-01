@@ -19,50 +19,41 @@ import Image from 'next/image';
 import CustomButton from './CustomButton';
 
 type IStoneProps = {
-  stoneType: string;
-  width: number;
-  height: number;
-  count: number;
-  stone: IStone;
-  selectedSide: string;
-  selectedRow: string;
-  setUpdateForm: (value: boolean) => void;
-  item : any
-  index: number
+  selectedRow: number;
+  item: IStone;
+  index: number;
 };
 
-function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count,item ,index}: IStoneProps) {
-
+function StoneCard({ selectedRow, item, index }: IStoneProps) {
   const { imageUrl, width, height, stoneType, thickness, _id } = item;
 
-  const { setOneStone, fetchAllStones } = useStoneStore((state: any) => state);
+  const {  fetchAllStones } = useStoneStore((state: any) => state);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
 
   const handleDelete = async (id: string) => {
-    toast.info('удаление записи...', { autoClose: true }); // Показываем индикатор загрузки
+    toast.info('удаление записи...', { autoClose: 2000 }); // Показываем индикатор загрузки
     const responce = await fetch('/api/stones/' + id, {
       method: 'DELETE',
       body: JSON.stringify({
-        selectedSide: selectedSide,
         selectedRow: selectedRow,
         index: index,
       }),
     });
     if (responce.status === 200) {
-      toast.success('Запись успешно удалена', {autoClose: true})
+      toast.success('Запись успешно удалена', { autoClose: 2000  });
       fetchAllStones('/api/stones');
     }
   };
 
-
-
   return (
-    <div className='grow  basis-64  rounded-xl'>
-      <Card className="shadow-xl  overflow-hidden cursor-pointer hover:opacity-90 transition mb-10 " onClick={() => { 
-        console.log(index)
-      }}>
+    <div className="grow  basis-64  rounded-xl">
+      <Card
+        className="shadow-xl  overflow-hidden cursor-pointer hover:opacity-90 transition mb-10 "
+        onClick={() => {
+          console.log(index);
+        }}>
         <CardHeader
           floated={false}
           shadow={false}
@@ -87,7 +78,7 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count,item
             />
           )}
         </CardHeader>
-        <CardBody className='px-4'>
+        <CardBody className="px-4">
           <Typography variant="h4" color="blue-gray" className="sm:text-lg">
             {item.stoneType}
           </Typography>
@@ -146,10 +137,6 @@ function StoneCard({ stone, selectedSide, selectedRow, setUpdateForm, count,item
       </Dialog>
     </div>
   );
-
-
-
-
 }
 
 export default StoneCard;

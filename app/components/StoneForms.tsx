@@ -17,7 +17,7 @@ interface IStoneForm {
   setFormModal: (value: boolean) => void;
   updateForm: boolean;
   setUpdateForm: (value: boolean) => void;
-  selectedRow: string;
+  selectedRow: number;
   stoneUpdate: any;
   selectedSide: string;
   count?: number;
@@ -92,7 +92,7 @@ IStoneForm) => {
       //   setLoading(false);
       // }
     } catch (err) {
-      toast.error('Ошибка при загрузке...', { autoClose: true });
+      toast.error('Ошибка при загрузке...', { autoClose: 2000 });
       console.log('Произошла ошибка при загрузке поста', err);
     } finally {
       setLoading(false);

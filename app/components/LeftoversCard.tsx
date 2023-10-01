@@ -119,7 +119,7 @@ function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
             </>
           ) : (
             <div className="flex flex-wrap  gap-5">
-              {card?.map((elem, index) => {
+              {card?.map((elem : IStone , index : number) => {
                 return (
                   <>
                     <StoneCard
@@ -127,7 +127,7 @@ function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
                       item={elem}
                       // count={counter}
                       // stone={stone}
-                      setUpdateForm={setUpdateForm}
+                      // setUpdateForm={setUpdateForm}
                       // selectedSide={'left'}
                       selectedRow={selectedRow}
                     />
