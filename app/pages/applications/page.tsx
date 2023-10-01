@@ -34,7 +34,7 @@ const Applications = () => {
     <>
       <Title style="mb-5">Список заявок на покупку расходников</Title>
       <div className="mb-10 relative  p-3">
-        <div className="mb-5 grid grid-cols-4 lg:grid-cols-2 mt:grid-cols-1 gap-7  rounded-sm  pb-4 ">
+        <div className="mb-10 grid grid-cols-4 lg:grid-cols-2 mt:grid-cols-1 gap-7  rounded-sm  pb-4 ">
           {allApplications.map((post: IApplication) => {
             return (
               <ApplicationsCard
@@ -64,15 +64,15 @@ const Applications = () => {
           loading={loading}
           setLoading={setLoading}
         />
+        <CustomButton
+          onClick={() => {
+            setFormModal(true);
+            setTypeModal('Добавить новую заявку');
+            setIsEdited(false);
+          }}>
+          Добавить новую заявку
+        </CustomButton>
       </div>
-      <CustomButton
-        onClick={() => {
-          setFormModal(true);
-          setTypeModal('Добавить новую заявку');
-          setIsEdited(false);
-        }}>
-        Добавить новую заявку
-      </CustomButton>
     </>
   );
 };

@@ -1,7 +1,11 @@
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 
-import dayjs from 'dayjs'
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export const getCurrentDateTime = () => {
-    const currentDate = dayjs().format('DD.MM.YY');
-    return currentDate;
-  }
+  const moscowTime = dayjs().tz('Europe/Moscow').format('DD.MM.YY HH:mm');
+  return moscowTime;
+};

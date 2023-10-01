@@ -35,13 +35,13 @@ const Repair = () => {
     <>
       <Title style="mb-5">Список заявок на ремонт инструментов</Title>
       <div className="mb-10 relative  p-3">
-        <div className="mb-5  grid grid-cols-4 lg:grid-cols-2 mt:grid-cols-1 gap-7 rounded-sm  pb-4">
+        <div className="mb-10  grid grid-cols-4 lg:grid-cols-2 mt:grid-cols-1 gap-7 rounded-sm  pb-4">
           {allApplications.length <= 0 ? (
             <Typography variant="h1" className="text-center w-full">
               Тут пока ничего нет
             </Typography>
           ) : (
-            allApplications.map((post : IApplication) => {
+            allApplications.map((post: IApplication) => {
               return (
                 <ApplicationsCard
                   pageType={pageType}
@@ -70,15 +70,16 @@ const Repair = () => {
           loading={loading}
           setLoading={setLoading}
         />
+
+        <CustomButton
+          onClick={() => {
+            setFormModal(true);
+            setTypeModal('Добавить новую заявку');
+            setIsEdited(false);
+          }}>
+          Добавить новую заявку
+        </CustomButton>
       </div>
-      <CustomButton
-        onClick={() => {
-          setFormModal(true);
-          setTypeModal('Добавить новую заявку');
-          setIsEdited(false);
-        }}>
-        Добавить новую заявку
-      </CustomButton>
     </>
   );
 };
