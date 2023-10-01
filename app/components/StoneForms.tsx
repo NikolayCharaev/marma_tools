@@ -87,10 +87,6 @@ IStoneForm) => {
           error: 'Promise rejected 🤯',
         }
       );
-      // if (responce.status === 200) {
-      //   // toast.success('Загрузка завершена!', { autoClose: true });
-      //   setLoading(false);
-      // }
     } catch (err) {
       toast.error('Ошибка при загрузке...', { autoClose: 2000 });
       console.log('Произошла ошибка при загрузке поста', err);

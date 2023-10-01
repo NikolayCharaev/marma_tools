@@ -26,7 +26,7 @@ const Card = ({ path, title, imageUrl, description, buttonText }: CardProps) => 
       </div>
       <div className="p-5">
         <div>
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
             {title!}
           </h5>
         </div>

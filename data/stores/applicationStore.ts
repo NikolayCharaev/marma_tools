@@ -3,8 +3,10 @@ import { getCurrentDateTime } from '@/utils/day';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
+import { toast } from 'react-toastify';
+
 export const useApplicationStore = create(
-  devtools((set : any, get : any) => ({
+  devtools((set: any, get: any) => ({
     allApplications: [],
     pageType: '',
     setPageType: (page: string) => {
@@ -16,15 +18,22 @@ export const useApplicationStore = create(
       set({ allApplications: applications });
     },
     fetchPostApplication: async (pond: string, post: IApplication) => {
-      await fetch(pond, {
-        method: 'POST',
-        body: JSON.stringify({
-          applicationName: post.applicationName,
-          more: post.more,
-          imageUrl: post.imageUrl,
-          date: post.date,
+      await toast.promise(
+        fetch(pond, {
+          method: 'POST',
+          body: JSON.stringify({
+            applicationName: post.applicationName,
+            more: post.more,
+            imageUrl: post.imageUrl,
+            date: post.date,
+          }),
         }),
-      });
+        {
+          pending: 'Загрузка заявки',
+          success: 'Заявка загружена 👌',
+          error: 'Ошибка  🤯',
+        },
+      );
       // Вызываем fetchAllApplications после добавления нового поста
 
       // @ts-ignore

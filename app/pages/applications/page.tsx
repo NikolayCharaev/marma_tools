@@ -12,7 +12,7 @@ import { IApplication } from '@/types/tools';
 
 const Applications = () => {
   const { fetchAllApplications, allApplications, pageType, setPageType } = useApplicationStore(
-    (state : any) => state,
+    (state: any) => state,
   );
 
   const [formModal, setFormModal] = useState<boolean>(false); //открытие и закрытие формы
@@ -24,9 +24,9 @@ const Applications = () => {
   useEffect(() => {
     setPageType('applications');
     fetchAllApplications('/api/applications');
-  }, [setPageType,fetchAllApplications]);
+  }, [setPageType, fetchAllApplications]);
 
-  const handlePostId = (value  : string) => {
+  const handlePostId = (value: string) => {
     setPostId(value);
   };
 
@@ -34,8 +34,8 @@ const Applications = () => {
     <>
       <Title style="mb-5">Список заявок на покупку расходников</Title>
       <div className="mb-10 relative  p-3">
-        <div className="mb-5 h-[760px] grid grid-cols-4 lg:grid-cols-2 mt:grid-cols-1 gap-7 overflow-scroll rounded-sm  pb-4 ">
-          {allApplications.map((post : IApplication ) => {
+        <div className="mb-5 grid grid-cols-4 lg:grid-cols-2 mt:grid-cols-1 gap-7  rounded-sm  pb-4 ">
+          {allApplications.map((post: IApplication) => {
             return (
               <ApplicationsCard
                 pageType={pageType}

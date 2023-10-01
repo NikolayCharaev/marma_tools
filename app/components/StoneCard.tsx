@@ -9,7 +9,7 @@ import {
   CardFooter,
   DialogBody,
 } from '@material-tailwind/react';
-import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
+import { AiFillDelete } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import { useStoneStore } from '@/data/stores/useStoneStore';
 
@@ -26,10 +26,8 @@ type IStoneProps = {
 
 function StoneCard({ selectedRow, item, index }: IStoneProps) {
   const { imageUrl, width, height, stoneType, thickness, _id } = item;
-
-  const {  fetchAllStones } = useStoneStore((state: any) => state);
-
   const [open, setOpen] = useState(false);
+  const { fetchAllStones } = useStoneStore((state: any) => state);
   const handleOpen = () => setOpen((cur) => !cur);
 
   const handleDelete = async (id: string) => {
@@ -42,7 +40,7 @@ function StoneCard({ selectedRow, item, index }: IStoneProps) {
       }),
     });
     if (responce.status === 200) {
-      toast.success('Запись успешно удалена', { autoClose: 2000  });
+      toast.success('Запись успешно удалена', { autoClose: 2000 });
       fetchAllStones('/api/stones');
     }
   };
@@ -68,7 +66,7 @@ function StoneCard({ selectedRow, item, index }: IStoneProps) {
               className="object-cover w-full h-full "
             />
           ) : (
-            <img
+            <Image
               // @ts-ignore
               src={imageUrl}
               width={300}
@@ -100,23 +98,6 @@ function StoneCard({ selectedRow, item, index }: IStoneProps) {
             }}>
             <AiFillDelete />
           </CustomButton>
-          {/* <CustomButton
-            onClick={(e) => {
-              e.preventDefault();
-              setUpdateForm(true);
-              setOneStone({
-                imageUrl,
-                width,
-                height,
-                stoneType,
-                selectedSide,
-                selectedRow,
-                count,
-                _id,
-              });
-            }}>
-            <AiFillEdit />
-          </CustomButton> */}
         </CardFooter>
       </Card>
       <Dialog

@@ -27,13 +27,9 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
   formModal,
   setFormModal,
   typeModal,
-  setIsEdited,
   isEdited,
   postId,
-  loading,
   pageType,
-  setLoading,
-  type,
 }) => {
   // @ts-ignore
   const { fetchPostApplication, fetchPatchApplication } = useApplicationStore((state) => state);
@@ -46,7 +42,7 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    
     const setNewImage = await addImage(postModel?.imageUrl);
     if (postModel?.imageUrl !== null) {
       try {
@@ -71,14 +67,12 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
     } catch (err) {
       console.log(err);
     } finally {
-      setLoading(false);
       setFormModal(false);
     }
   };
 
   const handleUpdate = async (e: FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     const setNewImage = await addImage(postModel?.imageUrl);
     if (postModel?.imageUrl !== null) {
       try {
@@ -103,14 +97,12 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
     } catch (err) {
       console.log(err);
     } finally {
-      setLoading(false);
       setFormModal(false);
     }
   };
 
   return (
     <div className="absolute top-0 left-1/2 ransform -translate-x-1/2 z-20 ">
-      {loading && <Preloader />}
       {formModal && (
         <div className="max-w-[700px] xs:max-w-[400px] shadow-2xl  p-20 mx-auto relative bg-white rounded-xl">
           <p className="mb-4">{typeModal}</p>

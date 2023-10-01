@@ -125,10 +125,6 @@ function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
                     <StoneCard
                       index={index}
                       item={elem}
-                      // count={counter}
-                      // stone={stone}
-                      // setUpdateForm={setUpdateForm}
-                      // selectedSide={'left'}
                       selectedRow={selectedRow}
                     />
                   </>
