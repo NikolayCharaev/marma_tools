@@ -31,7 +31,7 @@ const SearchStone = () => {
     <>
       <form className="flex gap-4 items-center mr-10 sm:text-sm" onSubmit={handleSubmit}>
         <input
-          className="p-2 rounded-sm w-96 sm:w-64 sm:h-[45px]"
+          className="p-2 rounded-sm w-96 sm:w-64 sm:h-[45px] text-base"
           name=""
           id=""
           type="text"

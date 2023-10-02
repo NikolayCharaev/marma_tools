@@ -125,7 +125,7 @@ const ApplicationsForm: FC<IApplicationsFormProps> = ({
               placeholder="введите название инструмента(расходника)"
               value={postModel?.applicationName}
               onChange={(e) => setPostModel({ ...postModel, applicationName: e.target.value })}
-              className="w-full p-2 border rounded-xl"
+              className="w-full p-2 border rounded-xl text-base"
             />
 
             <textarea

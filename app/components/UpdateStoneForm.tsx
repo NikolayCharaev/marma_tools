@@ -10,7 +10,7 @@ const UpdateStoneForm = ({  stoneUpdate } : any) => {
       <div className="flex gap-6 lg:flex-col">
         <input
           required
-          className="p-2 border rounded-xl"
+          className="p-2 border rounded-xl text-base "
           type="number"
           placeholder="новая длинна камня"
           value={stoneUpdate?.stoneWidth}
@@ -18,7 +18,7 @@ const UpdateStoneForm = ({  stoneUpdate } : any) => {
         />
         <input
           required
-          className="p-2 border rounded-xl"
+          className="p-2 border rounded-xl text-base"
           type="number"
           placeholder="новая ширина камня"
           value={stoneUpdate?.stoneHeight}
