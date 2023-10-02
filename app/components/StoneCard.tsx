@@ -19,12 +19,13 @@ import Image from 'next/image';
 import CustomButton from './CustomButton';
 
 type IStoneProps = {
-  selectedRow: number;
+  selectedRow?: number;
   item: IStone;
   index: number;
+  isSearch?: boolean;
 };
 
-function StoneCard({ selectedRow, item, index }: IStoneProps) {
+function StoneCard({ selectedRow, item, index, isSearch }: IStoneProps) {
   const { imageUrl, width, height, stoneType, thickness, _id } = item;
   const [open, setOpen] = useState(false);
   const { fetchAllStones } = useStoneStore((state: any) => state);
@@ -84,6 +85,7 @@ function StoneCard({ selectedRow, item, index }: IStoneProps) {
             variant="lead"
             color="gray"
             className="mt-3 font-normal sm:text-sm mt:text-xs">
+            {isSearch && <p>Находится в: {item.selectedRow} ряду</p>}
             <p>Длинна камня: {width} мм</p>
             <p>Высота камня: {height} мм</p>
             <p>Толщина камня: {thickness} мм</p>

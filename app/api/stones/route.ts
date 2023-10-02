@@ -24,6 +24,7 @@ export const POST = async (req: any) => {
       height: height,
       imageUrl: imageUrl,
       thickness: thickness,
+      selectedRow : selectedRow + 1
     });
 
     // // Сохраняем обновленный объект Pyramid в базе данных

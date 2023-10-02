@@ -13,10 +13,13 @@ export const useStoneStore = create(
     },
     oneStone: {},
     updateStone: {},
+    searchStone: [],
 
     // setAllStones: (stones) => set({ allStones: stones }),
-    setOneStone: (stone : IStone) => set({ oneStone: stone }),
-    setUpdateStone: (stone : IStone) => set({ updateStone: stone }),
-    removeAllBears: () => set({ bears: 0 }),
+    setOneStone: (stone: IStone) => set({ oneStone: stone }),
+    setUpdateStone: (stone: IStone) => set({ updateStone: stone }),
+    setSearchStone: (params: string) => set({ searchStone: get().allStones.flat().filter((elem : IStone) =>{
+     return elem.stoneType.toLowerCase() === params.toLowerCase()
+    }) }),
   })),
 );

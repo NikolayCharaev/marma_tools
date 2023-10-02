@@ -38,18 +38,6 @@ function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
     imageUrl: '',
   });
 
-  // const handleStonePacth = (prop) => {
-  //   setStoneUpdate({
-  //     ...stoneUpdate,
-  //     width: prop.width,
-  //     height: prop.height,
-  //     imageUrl: prop.imageUrl,
-  //   });
-  // };
-
-
-
-
 
   return (
     <>

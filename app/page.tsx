@@ -2,7 +2,6 @@ import { NavDataProps } from '../types/tools';
 import Card from './components/Card';
 import Title from './components/Title';
 import { navData } from '@/data/navData';
-
 export default function Home() {
   return (
     <div className="">

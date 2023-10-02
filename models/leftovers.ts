@@ -19,6 +19,9 @@ const stoneSchema = new Schema({
   thickness: {
     type: String,
   },
+  selectedRow : { 
+    type : Number
+  }
 });
 
 const pyramidSchema = new Schema({
