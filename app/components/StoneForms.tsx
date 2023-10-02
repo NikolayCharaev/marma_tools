@@ -154,7 +154,7 @@ IStoneForm) => {
 
       <div className="w-full flex flex-col items-center mt-[200px] lg:mt-[30px]">
         {/* {loading && <Preloader />} */}
-        <div className="w-[700px] lg:w-[500px] sm:w-[400px] sm:mx-10 xs:w-[330px] lg:text-base xs:text-xs  shadow-2xl p-20">
+        <div className="w-[700px] lg:w-[500px] sm:w-[400px] sm:mx-10 xs:w-[450px] lg:text-base xs:text-xs  shadow-2xl p-20 ">
           <form
             action=""
             onSubmit={!updateForm ? handleSubmit : handleUpdate}

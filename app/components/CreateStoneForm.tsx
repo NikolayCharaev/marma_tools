@@ -16,7 +16,7 @@ const CreateStoneForm: FC<IStoneForm> = ({ stone, setStone }) => {
         placeholder="введите название камня"
         value={stone?.stoneType}
         onChange={(e) => setStone({ ...stone, stoneType: e.target.value })}
-        className="w-full p-2 border rounded-xl text-base"
+        className="w-full p-2 border rounded-xl text-base "
       />
 
       <div className="flex gap-6 sm:flex-col xs:gap-3">
