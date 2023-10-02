@@ -19,7 +19,7 @@ export const useStoneStore = create(
     setOneStone: (stone: IStone) => set({ oneStone: stone }),
     setUpdateStone: (stone: IStone) => set({ updateStone: stone }),
     setSearchStone: (params: string) => set({ searchStone: get().allStones.flat().filter((elem : IStone) =>{
-     return elem.stoneType.toLowerCase() === params.toLowerCase()
+     return elem.stoneType.toLowerCase().trim() === params.toLowerCase().trim()
     }) }),
   })),
 );
