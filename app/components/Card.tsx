@@ -14,7 +14,7 @@ type CardProps = {
 
 const Card = ({ path, title, imageUrl, description, buttonText }: CardProps) => {
   return (
-    <div className="w-full border border-gray-200 rounded-lg shadow dark:bg-gray-900 dark:border-gray-700 hover:translate-y-[-10px] transition ">
+    <div className="w-full border rounded-lg shadow bg-gray-900 border-gray-700 hover:translate-y-[-10px] transition ">
       <div className="">
         <Image
           width={500}
@@ -26,7 +26,7 @@ const Card = ({ path, title, imageUrl, description, buttonText }: CardProps) => 
       </div>
       <div className="p-5">
         <div>
-          <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h5 className="mb-2 text-xl font-bold tracking-tight  text-white">
             {title!}
           </h5>
         </div>
