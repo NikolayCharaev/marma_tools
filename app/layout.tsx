@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             theme="dark"
           />
         </header>
-        <main className="container">{children}</main>
+        <main className="max-w-[1568px] w-full mx-auto pl-[1rem] pr-[1rem]">{children}</main>
       </body>
     </html>
   );
