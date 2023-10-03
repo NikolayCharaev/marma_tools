@@ -5,6 +5,7 @@ import notImage from '@/public/leftovers/not-image.jpg';
 import Image from 'next/image';
 import CustomButton from './CustomButton';
 import { useApplicationStore } from '@/data/stores/applicationStore';
+import {AiFillDelete} from 'react-icons/ai'
 
 interface IPostProps {
   post: {
@@ -14,17 +15,19 @@ interface IPostProps {
     applicationName: string;
     _id: string;
   };
-  setIsEdited: (value: boolean) => void;
-  formModal: boolean;
-  setTypeModal: (value: string) => void;
-  isEdited: boolean;
-  pageType: string;
-  setFormModal: (value: boolean) => void;
-  handlePostId: (value: string) => void;
+  setIsEdited?: (value: boolean) => void;
+  formModal?: boolean;
+  setTypeModal?: (value: string) => void;
+  isEdited?: boolean;
+  pageType?: string;
+  setFormModal?: (value: boolean) => void;
+  handlePostId?: (value: string) => void;
+  isAdmin: boolean;
 }
 const ApplicationsCard: FC<IPostProps> = ({
   post,
   formModal,
+  isAdmin,
   setFormModal,
   setTypeModal,
   setIsEdited,
@@ -33,7 +36,7 @@ const ApplicationsCard: FC<IPostProps> = ({
   handlePostId,
 }) => {
   // @ts-ignore
-  const { fetchAllApplications } = useApplicationStore() 
+  const { fetchAllApplications } = useApplicationStore();
   const { more, date, imageUrl, applicationName, _id } = post;
 
   const handleDelete = async (id: string) => {
@@ -91,17 +94,19 @@ const ApplicationsCard: FC<IPostProps> = ({
             onClick={() => {
               handleDelete(_id);
             }}>
-            Удалить
+                <AiFillDelete />
           </CustomButton>
-          <CustomButton
-            onClick={() => {
-              setFormModal(true);
-              setTypeModal('Изменить запись');
-              setIsEdited(true);
-              handlePostId(_id);
-            }}>
-            Редактировать
-          </CustomButton>
+          {!isAdmin && (
+            <CustomButton
+              onClick={() => {
+                setFormModal(true);
+                setTypeModal('Изменить запись');
+                setIsEdited(true);
+                handlePostId(_id);
+              }}>
+              Редактировать
+            </CustomButton>
+          )}
         </div>
       </CardFooter>
     </Card>
