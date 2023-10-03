@@ -5,7 +5,7 @@ import notImage from '@/public/leftovers/not-image.jpg';
 import Image from 'next/image';
 import CustomButton from './CustomButton';
 import { useApplicationStore } from '@/data/stores/applicationStore';
-import {AiFillDelete} from 'react-icons/ai'
+import { AiFillDelete } from 'react-icons/ai';
 
 interface IPostProps {
   post: {
@@ -22,7 +22,7 @@ interface IPostProps {
   pageType?: string;
   setFormModal?: (value: boolean) => void;
   handlePostId?: (value: string) => void;
-  isAdmin: boolean;
+  isAdmin?: boolean;
 }
 const ApplicationsCard: FC<IPostProps> = ({
   post,
@@ -94,14 +94,18 @@ const ApplicationsCard: FC<IPostProps> = ({
             onClick={() => {
               handleDelete(_id);
             }}>
-                <AiFillDelete />
+            <AiFillDelete />
           </CustomButton>
           {!isAdmin && (
             <CustomButton
               onClick={() => {
+                // @ts-ignore
                 setFormModal(true);
+                // @ts-ignore
                 setTypeModal('Изменить запись');
+                // @ts-ignore
                 setIsEdited(true);
+                // @ts-ignore
                 handlePostId(_id);
               }}>
               Редактировать
