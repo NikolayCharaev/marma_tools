@@ -10,11 +10,12 @@ export type NavDataProps = {
 export type IStone = {
   _id?: string;
   stoneType: string;
-  selectedRow? : number;
+  selectedRow?: number;
   height: number | string;
   width: number | string;
   imageUrl: null | File;
   thickness: string; // толщина камня
+  date?: string;
 };
 
 // applications types

@@ -85,7 +85,7 @@ function StoneCard({ selectedRow, item, index, isSearch }: IStoneProps) {
             variant="lead"
             color="gray"
             className="mt-3 font-normal sm:text-sm mt:text-xs">
-            {isSearch && <p>Находится в: {item.selectedRow} ряду</p>}
+            {isSearch && <p>Находится в {item.selectedRow} ряду</p>}
             <p>Длинна камня: {width} мм</p>
             <p>Высота камня: {height} мм</p>
             <p>Толщина камня: {thickness} мм</p>

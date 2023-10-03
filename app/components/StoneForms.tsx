@@ -6,10 +6,10 @@ import { toast } from 'react-toastify';
 import { addImage } from '@/utils/uploadImage';
 import Title from './Title';
 
+import { getCurrentDateTime } from '@/utils/day';
 import CreateStoneForm from './CreateStoneForm';
 
 import UpdateStoneForm from './UpdateStoneForm';
-import Preloader from './Preloader';
 
 import { IStone } from '@/types/tools';
 
@@ -79,12 +79,13 @@ IStoneForm) => {
             imageUrl: stone.imageUrl,
             selectedRow,
             selectedSide,
+            date : getCurrentDateTime()
           }),
         }),
         {
-          pending: 'Promise is pending',
-          success: 'Promise resolved 👌',
-          error: 'Promise rejected 🤯',
+          pending: 'загрузка данных...',
+          success: 'камень внесен в базу 👌',
+          error: 'ошибка 🤯',
         }
       );
     } catch (err) {

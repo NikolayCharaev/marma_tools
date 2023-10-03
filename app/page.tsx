@@ -1,8 +1,19 @@
+'use client';
+import { useEffect } from 'react';
 import { NavDataProps } from '../types/tools';
 import Card from './components/Card';
 import Title from './components/Title';
 import { navData } from '@/data/navData';
+import { useStoneStore } from '@/data/stores/useStoneStore';
+
 export default function Home() {
+  const { fetchAllStones } = useStoneStore(
+    (state: any) => state,
+  );
+
+  useEffect(() => {
+    fetchAllStones('/api/stones');
+  }, [fetchAllStones]);
   return (
     <div className="">
       <Title style="mb-10 ">Выберите категорию</Title>

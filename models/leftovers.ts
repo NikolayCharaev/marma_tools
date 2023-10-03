@@ -21,6 +21,9 @@ const stoneSchema = new Schema({
   },
   selectedRow : { 
     type : Number
+  },
+  date: { 
+    type : String
   }
 });
 

@@ -2,21 +2,11 @@ import { connectDB } from '@/utils/database';
 import Pyramid from '@/models/leftovers';
 
 export const POST = async (req: any) => {
-  const { stoneType, width, height, selectedRow, selectedSide, imageUrl, thickness } =
+  const { stoneType, width, height, selectedRow, selectedSide, imageUrl, thickness, date } =
     await req.json();
   try {
     await connectDB();
     let existingPyramid = await Pyramid.findOne({});
-    // if (!existingPyramid) {
-    //   existingPyramid = new Pyramid({
-    //     rowOne: { right: [] },
-    //     rowTwo: { left: [], right: [] },
-    //     rowThree: { left: [], right: [] },
-    //     rowFour: { left: [], right: [] },
-    //     rowFive: { left: [] },
-    //   });
-    // }
-
     // // Обновляем соответствующий массив в зависимости от выбранного ряда и стороны
     existingPyramid.rows[selectedRow].push({
       stoneType: stoneType,
@@ -24,7 +14,8 @@ export const POST = async (req: any) => {
       height: height,
       imageUrl: imageUrl,
       thickness: thickness,
-      selectedRow : selectedRow + 1
+      selectedRow: selectedRow + 1,
+      date: date,
     });
 
     // // Сохраняем обновленный объект Pyramid в базе данных
