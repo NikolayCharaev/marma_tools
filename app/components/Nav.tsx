@@ -20,7 +20,7 @@ const Nav = () => {
           className='sm:max-w-[130px]'
         />
   
-<Typography className='uppercase text-[#393E4F] font-bold text-2xl p-1 bg-white absolute top-0 right-0 sm:text-base'>marma <br/> tools</Typography>
+<Typography className='uppercase text-[#393E4F] font-bold text-2xl p-1 bg-[#FEFCFD] absolute top-0 right-0 sm:text-base'>marma <br/> tools</Typography>
       </Link>
       <Link href="../pages/admin-dashboard">
         <CustomButton>панель администрации</CustomButton>
