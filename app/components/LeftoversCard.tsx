@@ -1,15 +1,12 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { Dialog, DialogBody, Card, Typography, Tooltip } from '@material-tailwind/react';
+import { useState } from 'react';
+import { Dialog, DialogBody, Card, Typography } from '@material-tailwind/react';
 import Image from 'next/image';
 import StoneCard from './StoneCard';
-import Title from './Title';
-import CustomButton from './CustomButton';
 import StoneForm from './StoneForms';
 
 import { AiFillFileAdd } from 'react-icons/ai';
 
-// import { IStone } from '../types/tools';
 import { IStone } from '../../types/tools';
 import { useStoneStore } from '@/data/stores/useStoneStore';
 
@@ -25,7 +22,6 @@ interface ILeftowersCard {
 function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
-  // const { left, right } = card;
 
   const { allStones } = useStoneStore((state) => state);
   const [selectedSide, setSelectedSide] = useState<string>('');

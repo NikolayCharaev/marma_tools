@@ -20,7 +20,7 @@ export const navData = [
       path: './pages/applications',
       imageUrl: applicationBg,
       title: 'Оставить заявку на покупку расходников',
-      description: 'Управление заявками на расходных материалов',
+      description: 'Управление заявками для расходных материалов',
     },
     {
       path: './pages/repair',

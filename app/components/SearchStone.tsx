@@ -55,7 +55,7 @@ const SearchStone = () => {
             {searchStone?.map((elem: IStone, index: number) => {
               return (
                 <>
-                  <StoneCard index={index} item={elem} isSearch={true} />
+                  <StoneCard selectedRow={index} index={index} item={elem} isSearch={true} />
                 </>
               );
             })}

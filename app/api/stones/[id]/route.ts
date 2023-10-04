@@ -1,31 +1,30 @@
 import Pyramid from '@/models/leftovers';
 import { connectDB } from '@/utils/database';
 
-export const DELETE = async (req : any) => {
+export const DELETE = async (req: any) => {
   await connectDB();
   try {
-    const { selectedRow, selectedSide, index } = await req.json();
+    const { selectedRow, index } = await req.json();
 
     const pyramid = await Pyramid.findOne({});
-
     const stone = pyramid.rows[selectedRow];
-
     // Удаление выбранного элемента
     stone.splice(index, 1);
     // Сохранение изменений в базе данных
     await pyramid.save();
 
-    return new Response('Элемент успешно удален', { status: 200 });
+    return new Response('успех', { status: 200 });
   } catch (err) {
     console.log(err);
     return new Response('Произошла ошибка, повторите попытку позже', { status: 500 });
   }
 };
 
-export const PATCH = async (req : any) => {
+export const PATCH = async (req: any) => {
   await connectDB();
   try {
-    const { selectedRow, selectedSide, index, imageUrl, stoneWidth, stoneHeight, _id } = await req.json();
+    const { selectedRow, selectedSide, index, imageUrl, stoneWidth, stoneHeight, _id } =
+      await req.json();
     const pyramid = await Pyramid.findOne({});
     const stone = pyramid[selectedRow][selectedSide]; // объект изменяемого камня
 

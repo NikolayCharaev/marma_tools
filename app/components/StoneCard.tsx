@@ -48,11 +48,7 @@ function StoneCard({ selectedRow, item, index, isSearch }: IStoneProps) {
 
   return (
     <div className="grow  basis-64  rounded-xl">
-      <Card
-        className="shadow-xl  overflow-hidden cursor-pointer hover:opacity-90 transition mb-10 "
-        onClick={() => {
-          console.log(index);
-        }}>
+      <Card className="shadow-xl  overflow-hidden cursor-pointer hover:opacity-90 transition mb-10 ">
         <CardHeader
           floated={false}
           shadow={false}
@@ -77,7 +73,7 @@ function StoneCard({ selectedRow, item, index, isSearch }: IStoneProps) {
             />
           )}
         </CardHeader>
-        <CardBody className="px-4">
+        <CardBody className="p-4">
           <Typography variant="h4" color="blue-gray" className="sm:text-lg">
             {item.stoneType}
           </Typography>
@@ -91,16 +87,18 @@ function StoneCard({ selectedRow, item, index, isSearch }: IStoneProps) {
             <p>Толщина камня: {thickness} мм</p>
           </Typography>
         </CardBody>
-        <CardFooter className="pt-0 px-4 flex items-center mt-4">
-          <CustomButton
-            onClick={() => {
-              if (_id && confirm('Вы действительно хотите удалить запись?')) {
-                handleDelete(_id);
-              }
-            }}>
-            <AiFillDelete />
-          </CustomButton>
-        </CardFooter>
+        {!isSearch && (
+          <CardFooter className="pt-0 px-4 flex items-center mt-4">
+            <CustomButton
+              onClick={() => {
+                if (_id && confirm('Вы действительно хотите удалить запись?')) {
+                  handleDelete(_id);
+                }
+              }}>
+              <AiFillDelete />
+            </CustomButton>
+          </CardFooter>
+        )}
       </Card>
       <Dialog
         size="xl"
