@@ -102,7 +102,7 @@ function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
               />
             </>
           ) : (
-            <div className="flex flex-wrap  gap-5">
+            <div className="grid gap-5 grid-cols-3 xl:grid-cols-2 sm:flex sm:flex-wrap ">
               {card?.map((elem : IStone , index : number) => {
                 return (
                   <>

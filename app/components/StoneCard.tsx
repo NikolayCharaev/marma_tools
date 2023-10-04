@@ -47,13 +47,13 @@ function StoneCard({ selectedRow, item, index, isSearch }: IStoneProps) {
   };
 
   return (
-    <div className="grow  basis-64  rounded-xl">
+    <div className=" sm:w-full   rounded-xl">
       <Card className="shadow-xl  overflow-hidden cursor-pointer hover:opacity-90 transition mb-10 ">
         <CardHeader
           floated={false}
           shadow={false}
           color="transparent"
-          className="m-0 rounded-none h-[25rem] sm:h-72 mt:h-32 object-cover"
+          className="m-0 rounded-none h-[25rem] sm:h-72  object-cover"
           onClick={handleOpen}>
           {imageUrl === null ? (
             <Image
