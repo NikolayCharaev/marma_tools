@@ -27,7 +27,7 @@ const AdminDashboard = () => {
     <div>
       <div className="">
         <Title style="mb-5">
-          Список изменений в пирамиде за сегодня ({getCurrentDateTime().slice(0, 8)})
+          Список новых камней в пирамиде за сегодня ({getCurrentDateTime().slice(0, 8)})
         </Title>
         {!stonesToday.length && (
           <Typography className="mt-5" variant="h1">
