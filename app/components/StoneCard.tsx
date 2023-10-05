@@ -47,7 +47,7 @@ function StoneCard({ selectedRow, item, index, isSearch }: IStoneProps) {
   };
 
   return (
-    <div className=" sm:w-full   rounded-xl">
+    <div className="sm:w-full   rounded-xl">
       <Card className="shadow-xl  overflow-hidden cursor-pointer hover:opacity-90 transition mb-10 ">
         <CardHeader
           floated={false}

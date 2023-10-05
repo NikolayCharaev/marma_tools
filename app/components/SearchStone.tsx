@@ -6,14 +6,14 @@ import Title from './Title';
 import { toast } from 'react-toastify';
 import { useStoneStore } from '@/data/stores/useStoneStore';
 import StoneCard from './StoneCard';
-import { Dialog, DialogBody} from '@material-tailwind/react';
+import { Dialog, DialogBody } from '@material-tailwind/react';
 import { IStone } from '@/types/tools';
 const SearchStone = () => {
   const { setSearchStone, searchStone } = useStoneStore((state) => state);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
   const [stoneName, setStoneName] = useState<string>('');
-  const handleSubmit = async (e : FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     await setSearchStone(stoneName);
 
@@ -51,11 +51,11 @@ const SearchStone = () => {
         <DialogBody divider={true} className="p-0 ">
           <Title style="mb-10">Найденные результаты</Title>
 
-          <div className="flex flex-wrap  gap-5">
+          <div className="grid gap-5 grid-cols-3 xl:grid-cols-2 sm:flex sm:flex-wrap ">
             {searchStone?.map((elem: IStone, index: number) => {
               return (
                 <>
-                  <StoneCard selectedRow={index} index={index} item={elem} isSearch={true} />
+                  <StoneCard selectedRow={index + 1} index={index} item={elem} isSearch={true} />
                 </>
               );
             })}

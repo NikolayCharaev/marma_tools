@@ -64,6 +64,7 @@ function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
           className="w-full h-full object-cover "
           // @ts-ignore
           src={imageBg}
+          // loading='eager'
         />
 
         <Typography
