@@ -50,7 +50,7 @@ const AdminDashboard = () => {
           <div className="flex overflow-x-scroll  gap-5 w-full mb-5">
             {allApplications.map((elem: IApplication) => {
               return (
-                <div className="max-w-[400px] flex-none mb-5" key={elem._id}>
+                <div className="w-[400px] flex-none mb-5" key={elem._id}>
                   <ApplicationsCard post={elem} isAdmin={true} />
                 </div>
               );
