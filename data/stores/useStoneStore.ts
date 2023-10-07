@@ -14,16 +14,29 @@ export const useStoneStore = create(
     oneStone: {},
     updateStone: {},
     searchStone: [],
-    stonesToday : [],
+    stonesToday: [],
 
     // setAllStones: (stones) => set({ allStones: stones }),
     setOneStone: (stone: IStone) => set({ oneStone: stone }),
     setUpdateStone: (stone: IStone) => set({ updateStone: stone }),
-    setSearchStone: (params: string) => set({ searchStone: get().allStones.flat().filter((elem : IStone) =>{
-     return elem.stoneType.toLowerCase().trim() === params.toLowerCase().trim()
-    }) }),
-    setStonesToday: (params: string) => set({ stonesToday: get().allStones.flat().filter((elem : IStone) =>{
-      return elem?.date?.slice(0,8) === params.slice(0,8)
-     }) }),
+    setSearchStone: (params: string) =>
+      set({
+        searchStone: get()
+          .allStones.flat()
+          .filter((elem: IStone) => {
+            return elem.stoneType.toLowerCase().trim() === params.toLowerCase().trim();
+          }),
+      }),
+    setStonesToday: (params: string) =>
+      set({
+        stonesToday: get()
+          .allStones.flat()
+          .filter((elem: IStone) => {
+            return elem?.date?.slice(0, 8) === params.slice(0, 8);
+          }),
+      }),
+    setClearStone: () => {
+      set({ searchStone: [] });
+    },
   })),
 );

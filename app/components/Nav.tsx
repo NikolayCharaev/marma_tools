@@ -6,10 +6,18 @@ import Link from 'next/link';
 import CustomButton from './CustomButton';
 import { Typography } from '@material-tailwind/react';
 
+import { useStoneStore } from '@/data/stores/useStoneStore';
+
 const Nav = () => {
+  const { setClearStone } = useStoneStore((state: any) => state);
   return (
     <nav className="container mx-auto py-4 flex justify-between items-center mb-10">
-      <Link href="/" className="relative">
+      <Link
+        href="/"
+        className="relative"
+        onClick={() => {
+          setClearStone();
+        }}>
         <Image
           src="https://marmagroup.ru/local/templates/marma_custom_page/svg/logo.svg"
           alt="logo"
