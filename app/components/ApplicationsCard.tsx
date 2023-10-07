@@ -26,13 +26,11 @@ interface IPostProps {
 }
 const ApplicationsCard: FC<IPostProps> = ({
   post,
-  formModal,
   isAdmin,
   setFormModal,
   setTypeModal,
   setIsEdited,
   pageType,
-  isEdited,
   handlePostId,
 }) => {
   // @ts-ignore

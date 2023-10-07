@@ -1,20 +1,15 @@
 'use client';
 import { FC, useState, FormEvent } from 'react';
-
-import { AiOutlineLoading3Quarters, AiFillCloseCircle } from 'react-icons/ai';
+import { AiFillCloseCircle } from 'react-icons/ai';
 import { addImage } from '@/utils/uploadImage';
 import { getCurrentDateTime } from '@/utils/day';
 import { useApplicationStore } from '@/data/stores/applicationStore';
-import Preloader from './Preloader';
 import CustomButton from './CustomButton';
 
-import {IApplication} from '@/types/tools'
 
 interface IApplicationsFormProps {
   formModal: boolean;
   setFormModal: (value: boolean) => void;
-  loading: boolean;
-  setLoading: (value: boolean) => void;
   type: string;
   typeModal: string;
   setIsEdited: (value: boolean) => void;

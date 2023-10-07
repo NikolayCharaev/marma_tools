@@ -16,7 +16,6 @@ const Applications = () => {
   );
 
   const [formModal, setFormModal] = useState<boolean>(false); //открытие и закрытие формы
-  const [loading, setLoading] = useState<boolean>(false); // прелоадер загрузки
   const [typeModal, setTypeModal] = useState<string>('');
   const [isEdited, setIsEdited] = useState(false);
   const [postId, setPostId] = useState<string>('');
@@ -61,8 +60,6 @@ const Applications = () => {
           type={typeModal}
           formModal={formModal}
           setFormModal={setFormModal}
-          loading={loading}
-          setLoading={setLoading}
         />
         <CustomButton
           onClick={() => {

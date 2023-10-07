@@ -11,8 +11,6 @@ import CreateStoneForm from './CreateStoneForm';
 
 import UpdateStoneForm from './UpdateStoneForm';
 
-import { IStone } from '@/types/tools';
-
 interface IStoneForm {
   setFormModal: (value: boolean) => void;
   updateForm: boolean;

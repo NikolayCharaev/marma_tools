@@ -3,28 +3,28 @@ import { useState, useEffect, FormEvent } from 'react';
 import CustomButton from './CustomButton';
 import Title from './Title';
 
-import { toast } from 'react-toastify';
 import { useStoneStore } from '@/data/stores/useStoneStore';
 import StoneCard from './StoneCard';
 import { Dialog, DialogBody } from '@material-tailwind/react';
 import { IStone } from '@/types/tools';
+
+
 const SearchStone = () => {
   const { setSearchStone, searchStone } = useStoneStore((state) => state);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   const handleOpen = () => setOpen((cur) => !cur);
   const [stoneName, setStoneName] = useState<string>('');
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     await setSearchStone(stoneName);
-
-    console.log(searchStone);
-
     setStoneName('');
   };
 
   useEffect(() => {
     if (searchStone.length !== 0) {
       handleOpen();
+    }else { 
+      setOpen(false)
     }
   }, [searchStone]);
   return (

@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Title from '@/app/components/Title';
 import CustomButton from '@/app/components/CustomButton';
 import { getCurrentDateTime } from '@/utils/day';

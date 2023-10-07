@@ -8,7 +8,6 @@ import StoneForm from './StoneForms';
 import { AiFillFileAdd } from 'react-icons/ai';
 
 import { IStone } from '../../types/tools';
-import { useStoneStore } from '@/data/stores/useStoneStore';
 
 interface ILeftowersCard {
   card: any;
@@ -16,15 +15,11 @@ interface ILeftowersCard {
   index: number;
 }
 
-{
-  /*// @ts-ignore*/
-}
 function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
 
-  const { allStones } = useStoneStore((state) => state);
-  const [selectedSide, setSelectedSide] = useState<string>('');
+  const [selectedSide] = useState<string>('');
   const [selectedRow, setSelectedRow] = useState<number>(0);
   const [formModal, setFormModal] = useState<boolean>(false);
   const [updateForm, setUpdateForm] = useState<boolean>(false);
@@ -34,11 +29,10 @@ function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
     imageUrl: '',
   });
 
-
   return (
     <>
       <Card
-        className=" cursor-pointer overflow-hidden transition-opacity hover:opacity-90 w-72 h-[70vh] 3xl:h-96 sm:w-[90vw]  sm:mx-0  relative "
+        className=" cursor-pointer overflow-hidden transition-opacity hover:opacity-90 w-72 h-[70vh]  3xl:h-96 sm:w-[90vw]  sm:mx-0  relative "
         onClick={() => {
           handleOpen();
           switch (index) {
@@ -104,14 +98,10 @@ function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
             </>
           ) : (
             <div className="grid gap-5 grid-cols-3 xl:grid-cols-2 sm:flex sm:flex-wrap ">
-              {card?.map((elem : IStone , index : number) => {
+              {card?.map((elem: IStone, index: number) => {
                 return (
                   <>
-                    <StoneCard
-                      index={index}
-                      item={elem}
-                      selectedRow={selectedRow}
-                    />
+                    <StoneCard index={index} item={elem} selectedRow={selectedRow} />
                   </>
                 );
               })}

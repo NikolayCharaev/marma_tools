@@ -1,6 +1,5 @@
 'use client';
-
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Title from '@/app/components/Title';
 import rowOneBg from '@/public/leftovers/row-1.jpg';
 import rowTwoBg from '@/public/leftovers/row-2.jpg';
@@ -10,13 +9,11 @@ import rowFiveBg from '@/public/leftovers/row-5.jpg';
 import LeftoversCard from '@/app/components/LeftoversCard';
 
 const images = [rowOneBg, rowTwoBg, rowThreeBg, rowFourBg, rowFiveBg];
-import { toast } from 'react-toastify';
 import { useStoneStore } from '@/data/stores/useStoneStore';
 import SearchStone from '@/app/components/SearchStone';
-import { IStone } from '@/types/tools';
 
 const Leftovers = () => {
-  const { allStones, setAllStones, fetchAllStones } = useStoneStore((state: any) => state);
+  const { allStones, fetchAllStones } = useStoneStore((state: any) => state);
 
   useEffect(() => {
     fetchAllStones('/api/stones');
