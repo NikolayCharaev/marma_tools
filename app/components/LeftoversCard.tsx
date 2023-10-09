@@ -100,9 +100,7 @@ function LeftoversCard({ card, imageBg, index }: ILeftowersCard) {
             <div className="grid gap-5 grid-cols-3 xl:grid-cols-2 sm:flex sm:flex-wrap ">
               {card?.map((elem: IStone, index: number) => {
                 return (
-                  <>
-                    <StoneCard index={index} item={elem} selectedRow={selectedRow} />
-                  </>
+                  <StoneCard key={elem._id} index={index} item={elem} selectedRow={selectedRow} />
                 );
               })}
             </div>

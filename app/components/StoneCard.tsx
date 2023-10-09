@@ -77,15 +77,14 @@ function StoneCard({ selectedRow, item, index, isSearch }: IStoneProps) {
           <Typography variant="h4" color="blue-gray" className="sm:text-lg">
             {item.stoneType}
           </Typography>
-          <Typography
-            variant="lead"
+          <div
             color="gray"
             className="mt-3 font-normal sm:text-sm mt:text-xs">
             {isSearch && <p>Находится в {item.selectedRow} ряду</p>}
             <p>Длинна камня: {width} мм</p>
             <p>Высота камня: {height} мм</p>
             <p>Толщина камня: {thickness} мм</p>
-          </Typography>
+          </div>
         </CardBody>
         {!isSearch && (
           <CardFooter className="pt-0 px-4 flex items-center mt-4">

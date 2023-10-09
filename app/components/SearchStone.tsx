@@ -8,7 +8,6 @@ import StoneCard from './StoneCard';
 import { Dialog, DialogBody } from '@material-tailwind/react';
 import { IStone } from '@/types/tools';
 
-
 const SearchStone = () => {
   const { setSearchStone, searchStone } = useStoneStore((state) => state);
   const [open, setOpen] = useState<boolean>(false);
@@ -23,8 +22,8 @@ const SearchStone = () => {
   useEffect(() => {
     if (searchStone.length !== 0) {
       handleOpen();
-    }else { 
-      setOpen(false)
+    } else {
+      setOpen(false);
     }
   }, [searchStone]);
   return (
@@ -54,9 +53,13 @@ const SearchStone = () => {
           <div className="grid gap-5 grid-cols-3 xl:grid-cols-2 sm:flex sm:flex-wrap ">
             {searchStone?.map((elem: IStone, index: number) => {
               return (
-                <>
-                  <StoneCard selectedRow={index + 1} index={index} item={elem} isSearch={true} />
-                </>
+                <StoneCard
+                  key={elem._id}
+                  selectedRow={index + 1}
+                  index={index}
+                  item={elem}
+                  isSearch={true}
+                />
               );
             })}
           </div>
